@@ -1,21 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WPFTutorial.Model;
 
 namespace WPFTutorial.DB
 {
-    // establishing connection to the database
     public class DatabaseContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Course> Courses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=Datafile.db"); // Datafile.db is located in the bin folder
+            optionsBuilder.UseSqlite("Data Source=WPFTutorial.db");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasDiscriminator<string>("Discriminator")
+                .HasValue<User>("User")
+                .HasValue<Student>("Student")
+                .HasValue<Teacher>("Teacher");
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
