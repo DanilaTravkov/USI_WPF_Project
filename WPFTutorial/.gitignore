@@ -4,3 +4,4 @@
 .vs/    # Ignore the .vs folder, which contains Visual Studio configuration and temporary files.
 bin/    # Ignore the bin folder, which typically contains binary output (compiled executable files).
 obj/    # Ignore the obj folder, which typically contains intermediate build files.
+.db     # Ignore .db file since it holds sensitive data and should not be on display
