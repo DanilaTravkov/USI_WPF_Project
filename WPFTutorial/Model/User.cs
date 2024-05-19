@@ -9,14 +9,20 @@ using System.Threading.Tasks;
 namespace WPFTutorial.Model
 {
 
-    // WARNING! At this moment migrations do no work as expected, if you want to change this file and run the app you would have to delete .db file in the bin folder as well as the Migartions folder
+    // Update 19.05 migrations are fixed 
     public enum Role { TEACHER, STUDENT, ADMIN }
 
     public class User
     {
-        public User() 
-        { 
-
+        public User(string name, string surname, string email, string password, string gender, DateTime? dateOfBirth, Role role) 
+        {
+            Name = name;
+            Surname = surname;
+            Email = email;
+            Password = password;
+            Gender = gender;
+            DateOfBirth = dateOfBirth;
+            Role = role;
         }
         [Key] // decorator to make Id a unique field
         public int Id { get; set; }

@@ -12,6 +12,8 @@ using WPFTutorial.View;
 
 namespace WPFTutorial.ViewModel
 {
+
+    // Entry point of the application
     public class MainViewModel
     {
         public ObservableCollection<User> Users { get; set; }
@@ -22,7 +24,7 @@ namespace WPFTutorial.ViewModel
         {
             using (DatabaseContext dbContext = new DatabaseContext())
             {
-                Users = new ObservableCollection<User>(dbContext.Users.ToList());
+                Users = new ObservableCollection<User>(dbContext.Users.ToList()); // Display all users on the MainWindow.xaml
 
                 ShowWindowCommand = new RelayCommand(ShowWindow, CanShowWindow); // We assign an instance of a RelayCommand to the command and pass the action function as the first param
             }

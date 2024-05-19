@@ -16,7 +16,12 @@ namespace WPFTutorial.ViewModel
 
         public ICommand AddUserCommand { get; set; }
         public string? Name {  get; set; }
+        public string? Surname {  get; set; }
         public string? Email { get; set; }
+        public string? Password { get; set; }
+        public string? Gender {  get; set; }
+        public DateTime DateOfBirth {  get; set; }
+        public Model.Role Role { get; set; }
 
         public AddUserViewModel()
         {
@@ -36,7 +41,7 @@ namespace WPFTutorial.ViewModel
             else
             {
 
-                User newUser = new User { Name = Name, Email = Email };
+                User newUser = new User(Name, Surname, Email, Password, Gender, DateOfBirth, Role);
 
                 using (DatabaseContext dbContext = new DatabaseContext())
                 {
@@ -46,7 +51,12 @@ namespace WPFTutorial.ViewModel
                 }
 
                 Name = null;
+                Surname = null;
                 Email = null;
+                Password = null;
+                Gender = null;
+                DateOfBirth = default;
+                Role = default;
             }
         }
     }
