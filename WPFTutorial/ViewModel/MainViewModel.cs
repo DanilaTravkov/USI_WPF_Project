@@ -19,6 +19,7 @@ namespace WPFTutorial.ViewModel
         public ObservableCollection<User> Users { get; set; }
 
         public ICommand ShowWindowCommand { get; set; } // Instead of events we use commands
+        public ICommand ShowLoginCommand {  get; set; }
 
         public MainViewModel() 
         {
@@ -27,7 +28,13 @@ namespace WPFTutorial.ViewModel
                 Users = new ObservableCollection<User>(dbContext.Users.ToList()); // Display all users on the MainWindow.xaml
 
                 ShowWindowCommand = new RelayCommand(ShowWindow, CanShowWindow); // We assign an instance of a RelayCommand to the command and pass the action function as the first param
+                ShowLoginCommand = new RelayCommand(ShowLogin, CanShowLogin);
             }
+        }
+
+        private bool CanShowLogin(object obj)
+        {
+            return true;
         }
 
         private bool CanShowWindow(object obj) // We probably won't use this much but its a good idea to keep this structure
@@ -39,6 +46,13 @@ namespace WPFTutorial.ViewModel
         {
             AddUser addUserWindow = new AddUser();
             addUserWindow.Show();
+        }
+
+        // Show login window
+        private void ShowLogin(object obj)
+        {
+            Login login = new Login();
+            login.Show();
         }
     }
 }

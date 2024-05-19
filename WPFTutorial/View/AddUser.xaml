@@ -5,15 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFTutorial.View"
         mc:Ignorable="d"
-        Title="AddUser" Height="450" Width="400">
+        Title="AddUser" Height="550" Width="400">
     <Grid>
         <Label Content="Name" Margin="25" VerticalAlignment="Top" HorizontalAlignment="left"></Label>
-        <TextBox Text="{Binding Name}" Height="30" Width="200" Margin="25, 50" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="2" BorderBrush="Orange"/>
+        <TextBox Text="{Binding Name}" Height="30" Width="200" Margin="25, 50" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="2" BorderBrush="DarkSlateBlue"/>
 
         <Label Content="Email" Margin="25, 100" VerticalAlignment="Top" HorizontalAlignment="left"></Label>
-        <TextBox Text="{Binding Email}" Height="30" Width="200" Margin="25, 125" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="2" BorderBrush="Orange"/>
+        <TextBox Text="{Binding Email}" Height="30" Width="200" Margin="25, 125" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="2" BorderBrush="DarkSlateBlue"/>
 
-        <!-- In Butoons instead of events we use Command attributes -->
-        <Button Command="{Binding AddUserCommand}" Height="30" Width="70" Content="+ Add" VerticalContentAlignment="Center" Padding="5" HorizontalAlignment="Left" Margin="25"/>
+        <Label Content="Surname" Margin="25, 175" VerticalAlignment="Top" HorizontalAlignment="left"></Label>
+        <TextBox Text="{Binding Surname}" Height="30" Width="200" Margin="25, 200" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="2" BorderBrush="DarkSlateBlue"/>
+
+        <Label Content="Password" Margin="25,250,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></Label>
+        <TextBox Text="{Binding Password}" Height="30" Width="200" Margin="25,275,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="2" BorderBrush="DarkSlateBlue"/>
+
+        <Label Content="Gender" Margin="25,325,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></Label>
+        <TextBox Text="{Binding Gender}" Height="30" Width="200" Margin="25,350,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="2" BorderBrush="DarkSlateBlue"/>
+
+        <Label Content="Date of birth" Margin="25,400,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"></Label>
+        <DatePicker BorderBrush="DarkSlateBlue" SelectedDate="{Binding DateOfBirth}" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="200" Margin="25,425,0,0" BorderThickness="2"/>
+
+        <!-- In Buttons instead of events we use Command attributes -->
+        <Button Command="{Binding AddUserCommand}" Height="30" Width="70" Content="Submit" VerticalAlignment="Bottom" Padding="5" HorizontalAlignment="Right" Margin="25" Background="DarkSlateBlue" Foreground="White"/>
     </Grid>
 </Window>

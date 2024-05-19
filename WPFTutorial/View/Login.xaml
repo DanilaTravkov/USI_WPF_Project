@@ -1,0 +1,19 @@
+﻿<Window x:Class="WPFTutorial.View.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFTutorial.View"
+        mc:Ignorable="d"
+        Title="Login" Height="450" Width="800">
+    <Grid>
+        <Label Content="Email" Margin="25" VerticalAlignment="Top" HorizontalAlignment="left"></Label>
+        <TextBox Text="{Binding Email}" Height="30" Width="200" Margin="25, 50" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="2" BorderBrush="DarkSlateBlue"/>
+
+        <Label Content="Password" Margin="25, 100" VerticalAlignment="Top" HorizontalAlignment="left"></Label>
+        <TextBox Text="{Binding Password}" Height="30" Width="200" Margin="25, 125" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="2" BorderBrush="DarkSlateBlue"/>
+
+        <Button Command="{Binding SubmitLoginCommand}" Height="30" Width="70" Content="Submit" VerticalAlignment="Bottom" Padding="5" HorizontalAlignment="Left" Margin="25" Background="DarkSlateBlue" Foreground="White"/>
+
+    </Grid>
+</Window>

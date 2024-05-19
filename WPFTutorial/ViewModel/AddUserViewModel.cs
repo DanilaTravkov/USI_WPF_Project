@@ -11,6 +11,8 @@ using WPFTutorial.Model;
 
 namespace WPFTutorial.ViewModel
 {
+
+    // TODO: Change this to LoginViewModel.xaml
     public class AddUserViewModel
     {
 
@@ -35,7 +37,7 @@ namespace WPFTutorial.ViewModel
 
         private void AddUser(object obj)
         {
-            if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Email)) {
+            if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Gender)) {
                 MessageBox.Show("Some input(s) are empty!");
             }
             else
