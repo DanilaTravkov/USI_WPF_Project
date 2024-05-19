@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using WPFTutorial.DB;
 
 namespace WPFTutorial
@@ -11,12 +11,12 @@ namespace WPFTutorial
     /// </summary>
     public partial class App : Application
     {
-
-        protected override void OnStartup(StartupEventArgs e) // override application start-up method to ensure that the db file has already been created, if not create a new db file
+        protected override void OnStartup(StartupEventArgs e)
         {
-            DatabaseFacade facade = new DatabaseFacade(new DatabaseContext());
-            facade.EnsureCreated();
+            using (var context = new DatabaseContext())
+            {
+                context.Database.Migrate();
+            }
         }
     }
-
 }
