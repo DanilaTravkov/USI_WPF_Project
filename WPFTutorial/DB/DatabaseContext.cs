@@ -10,7 +10,7 @@ namespace WPFTutorial.DB
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=WPFTutorial.db");
+            optionsBuilder.UseSqlite("Data Source=Datafile.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

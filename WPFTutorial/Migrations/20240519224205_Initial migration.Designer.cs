@@ -11,8 +11,8 @@ using WPFTutorial.DB;
 namespace WPFTutorial.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240519222713_AddNewTablesAgain")]
-    partial class AddNewTablesAgain
+    [Migration("20240519224205_Initial migration")]
+    partial class Initialmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
