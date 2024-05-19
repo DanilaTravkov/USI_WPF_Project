@@ -41,4 +41,4 @@ https://learn.microsoft.com/ru-ru/ef/core/
 -1. Navigate to Tools > NuGet Package Manager > Package Manager Console
 -2. Create a migration, run: add-migration "migration name"
 -3. Apply migrations, run: update-database
--4. Enjoy life
+-4. Enjoy life!
