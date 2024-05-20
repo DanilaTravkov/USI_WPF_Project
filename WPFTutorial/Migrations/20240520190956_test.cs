@@ -5,7 +5,7 @@
 namespace WPFTutorial.Migrations
 {
     /// <inheritdoc />
-    public partial class AddeddefaultvaluestoUserRole : Migration
+    public partial class test : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

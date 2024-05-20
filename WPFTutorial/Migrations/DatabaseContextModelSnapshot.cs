@@ -52,7 +52,7 @@ namespace WPFTutorial.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("WPFTutorial.Model.User", b =>
@@ -89,7 +89,7 @@ namespace WPFTutorial.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("User");
 
@@ -99,6 +99,11 @@ namespace WPFTutorial.Migrations
             modelBuilder.Entity("WPFTutorial.Model.Student", b =>
                 {
                     b.HasBaseType("WPFTutorial.Model.User");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("TEXT");
+
+                    b.HasIndex("CourseId");
 
                     b.HasDiscriminator().HasValue("Student");
                 });
@@ -119,6 +124,22 @@ namespace WPFTutorial.Migrations
                         .IsRequired();
 
                     b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("WPFTutorial.Model.Student", b =>
+                {
+                    b.HasOne("WPFTutorial.Model.Course", "Course")
+                        .WithMany("Students")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("WPFTutorial.Model.Course", b =>
+                {
+                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }

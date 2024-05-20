@@ -22,6 +22,7 @@ namespace WPFTutorial.ViewModel
         public ICommand SortCoursesByCreationDateCommand { get; set; }
         public ICommand SortCoursesByLanguageCommand { get; set; }
         public ICommand SortCoursesByLevelCommand { get; set; }
+        public ICommand ShowCreateCourseCommand { get; set; }
 
         public ObservableCollection<Course>? TeacherCourses;
 
@@ -35,6 +36,18 @@ namespace WPFTutorial.ViewModel
             SortCoursesByCreationDateCommand = new RelayCommand(SortCoursesByCreationDate, CanSortCoursesByCreationDate);
             SortCoursesByLanguageCommand = new RelayCommand(SortCoursesByLanguage, CanSortCoursesByLanguage);
             SortCoursesByLevelCommand = new RelayCommand(SortCoursesByLevel, CanSortCoursesByLevel);
+            ShowCreateCourseCommand = new RelayCommand(ShowCreateCourse, CanCreateCourse);
+        }
+
+        private bool CanCreateCourse(object obj)
+        {
+            return true;
+        }
+
+        private void ShowCreateCourse(object obj)
+        {
+            // TODO
+            throw new NotImplementedException();
         }
 
         private bool CanSortCoursesByCreationDate(object obj)

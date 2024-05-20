@@ -9,9 +9,10 @@
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Width="200" Content="Sort by Creation Date" Command="{Binding SortCoursesByCreationDateCommand}" />
-                <Button Width="200" Content="Sort by Language" Command="{Binding SortCoursesByLanguageCommand}" />
-                <Button Width="200" Content="Sort by Level" Command="{Binding SortCoursesByLevelCommand}" />
+                <Button Width="150" Content="Sort by Creation Date" Command="{Binding SortCoursesByCreationDateCommand}" />
+                <Button Width="150" Content="Sort by Language" Command="{Binding SortCoursesByLanguageCommand}" />
+                <Button Width="150" Content="Sort by Level" Command="{Binding SortCoursesByLevelCommand}" />
+                <Button Width="150" Content="Create a course" Command="{Binding CreateCourseCommand}" />
             </StackPanel>
             <ListView ItemsSource="{Binding TeacherCourses}">
                 <ListView.View>

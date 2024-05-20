@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace WPFTutorial.Model
 {
 
-    // Update 19.05 migrations are fixed 
+    // When a student is deleted, it is also deleted from and exam deadlines
+
     public enum Role { TEACHER = 1, STUDENT = 2, ADMIN = 3 }
 
     public class User

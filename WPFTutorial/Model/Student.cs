@@ -17,6 +17,11 @@ namespace WPFTutorial.Model
 
         [Key]
         public Guid Id { get; set; }
+        public Guid CourseId { get; set; }
+
+        // relational fields
+        public Course Course { get; set; } // TODO: A student can have only one course
+        // public IDictionary<string, Model.ELevel> LanguageLevel { get; set; } = new Dictionary<string, Model.ELevel>();
 
     }
 }

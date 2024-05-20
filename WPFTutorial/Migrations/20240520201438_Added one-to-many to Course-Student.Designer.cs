@@ -11,8 +11,8 @@ using WPFTutorial.DB;
 namespace WPFTutorial.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240520155554_Added default values to User.Role")]
-    partial class AddeddefaultvaluestoUserRole
+    [Migration("20240520201438_Added one-to-many to Course-Student")]
+    partial class AddedonetomanytoCourseStudent
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -103,6 +103,11 @@ namespace WPFTutorial.Migrations
                 {
                     b.HasBaseType("WPFTutorial.Model.User");
 
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("TEXT");
+
+                    b.HasIndex("CourseId");
+
                     b.HasDiscriminator().HasValue("Student");
                 });
 
@@ -122,6 +127,22 @@ namespace WPFTutorial.Migrations
                         .IsRequired();
 
                     b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("WPFTutorial.Model.Student", b =>
+                {
+                    b.HasOne("WPFTutorial.Model.Course", "Course")
+                        .WithMany("Students")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("WPFTutorial.Model.Course", b =>
+                {
+                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }

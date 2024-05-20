@@ -15,7 +15,7 @@ namespace WPFTutorial.Model
     }
     public enum WeekDays
     {
-        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+        MONDAY = 1, TUESDAY = 2, WEDNESDAY = 3, THURSDAY = 4, FRIDAY = 5, SATURDAY = 6, SUNDAY = 7
     }
     public class Course
     {
@@ -32,12 +32,13 @@ namespace WPFTutorial.Model
         public bool? IsOnline {  get; set; }
         public int? MaxStudents { get; set; } = 0; // Add max students which can attend this course IF IsOnline is false
         public TimeOnly ClassDuration { get; } = new TimeOnly(1, 30); // 1 hour and 30 minutes (90 minutes)
-
         public string? CourseName {  get; set; }
 
         // relational fields
 
         private Teacher _Teacher; // Teacher assosiated with this course
         public Teacher Teacher { get { return _Teacher; } set { _Teacher = value; } }
+        public ICollection<Student> Students { get; set; } = new List<Student>(); // A course can have many students
+
     }
 }

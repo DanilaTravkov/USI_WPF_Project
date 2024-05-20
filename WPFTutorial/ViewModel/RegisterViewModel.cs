@@ -15,26 +15,26 @@ namespace WPFTutorial.ViewModel
     // TODO: Change this to LoginViewModel.xaml
     public class RegisterViewModel
     {
-        public ICommand AddUserCommand { get; set; }
+        public ICommand AddStudentCommand { get; set; }
         public string? Name {  get; set; }
         public string? Surname {  get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
         public string? Gender {  get; set; }
         public DateTime DateOfBirth {  get; set; }
-        public Model.Role Role { get; set; }
+        public Model.Role Role { get; } = Model.Role.STUDENT;
 
         public RegisterViewModel()
         {
-            AddUserCommand = new RelayCommand(AddUser, CanAddUser);
+            AddStudentCommand = new RelayCommand(AddStudent, CanAddStudent);
         }
 
-        private bool CanAddUser(object obj)
+        private bool CanAddStudent(object obj)
         {
             return true;
         }
 
-        private void AddUser(object obj)
+        private void AddStudent(object obj)
         {
             if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Gender)) {
                 MessageBox.Show("Some input(s) are empty!");
@@ -42,13 +42,13 @@ namespace WPFTutorial.ViewModel
             else
             {
 
-                User newUser = new User(Name, Surname, Email, Password, Gender, DateOfBirth, Role);
+                Student newStudent = new Student(Name, Surname, Email, Password, Gender, DateOfBirth, Role); // When a new user is created they don't have any related courses yet
 
                 using (DatabaseContext dbContext = new DatabaseContext())
                 {
-                    dbContext.Users.Add(newUser);
+                    dbContext.Students.Add(newStudent);
                     dbContext.SaveChanges();
-                    MessageBox.Show("Succsessfully created a new user");
+                    MessageBox.Show("Succsessfully created a new student");
                 }
 
                 Name = null;
@@ -57,7 +57,6 @@ namespace WPFTutorial.ViewModel
                 Password = null;
                 Gender = null;
                 DateOfBirth = default;
-                Role = default;
             }
         }
     }

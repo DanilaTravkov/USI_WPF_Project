@@ -23,8 +23,8 @@ namespace WPFTutorial.ViewModel
         // TODO: show different register windows for students and teacher;
         private void ShowRegisterAsTeacher(object obj)
         {
-            AddUser register = new AddUser();
-            register.Show();
+            RegisterTeacher registerTeacher = new RegisterTeacher();
+            registerTeacher.Show();
         }
 
         // TODO: show different register windows for students and teacher;

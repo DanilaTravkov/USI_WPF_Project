@@ -11,14 +11,29 @@ using WPFTutorial.DB;
 namespace WPFTutorial.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240519224205_Initial migration")]
-    partial class Initialmigration
+    [Migration("20240520190956_test")]
+    partial class test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.5");
+
+            modelBuilder.Entity("StudentCourse", b =>
+                {
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("StudentId", "CourseId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("StudentCourse");
+                });
 
             modelBuilder.Entity("WPFTutorial.Model.Course", b =>
                 {
@@ -41,8 +56,8 @@ namespace WPFTutorial.Migrations
                     b.Property<DateOnly?>("StartsAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("WeekDays")
                         .IsRequired()
@@ -60,9 +75,9 @@ namespace WPFTutorial.Migrations
 
             modelBuilder.Entity("WPFTutorial.Model.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("TEXT");
@@ -111,6 +126,21 @@ namespace WPFTutorial.Migrations
                     b.HasBaseType("WPFTutorial.Model.User");
 
                     b.HasDiscriminator().HasValue("Teacher");
+                });
+
+            modelBuilder.Entity("StudentCourse", b =>
+                {
+                    b.HasOne("WPFTutorial.Model.Course", null)
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WPFTutorial.Model.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WPFTutorial.Model.Course", b =>

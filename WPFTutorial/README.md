@@ -45,3 +45,15 @@ https://learn.microsoft.com/ru-ru/ef/core/
 ------------------------------------------------------------------------------------------------------------------------------------------
 4. WPF does not provide session storing so to keep the current logged-in user I've created the UserSession class in Session folder with a static field which represent a singleton object of a user session.
 Use it to get data about the current user.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+5.
+Log in as a teacher:
+
+login: john@gmail.com
+password: 123
+
+Log in as a student:
+
+login:
+password:
