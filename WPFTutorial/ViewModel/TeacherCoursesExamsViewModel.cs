@@ -12,27 +12,29 @@ using WPFTutorial.Session;
 
 namespace WPFTutorial.ViewModel
 {
+    // Predavac 1, 3
     public class TeacherCoursesExamsViewModel
     {
 
         public ICommand? SeeCoursesCommand { get; set; }
         public ICommand? SeeExamsCommand { get; set; }
 
+        public ICommand SortCoursesByCreationDateCommand { get; set; }
+        public ICommand SortCoursesByLanguageCommand { get; set; }
+        public ICommand SortCoursesByLevelCommand { get; set; }
+
         public ObservableCollection<Course>? TeacherCourses;
-
-        
-
-        // public string? CourseName;
-        // public Model.ELevel? CourseLevel;
-        // public int? WeeksDuration;
-        // public DateTime? StartsAt;
-        // public bool? IsOnline;
 
         public TeacherCoursesExamsViewModel() 
         {
             TeacherCourses = new ObservableCollection<Course>();
             SeeCoursesCommand = new RelayCommand(ListCoursesData, CanListCoursesData);
             // SeeExamsCommand = new RelayCommand();
+
+
+            SortCoursesByCreationDateCommand = new RelayCommand(SortCoursesByCreationDate);
+            SortCoursesByLanguageCommand = new RelayCommand(SortCoursesByLanguage);
+            SortCoursesByLevelCommand = new RelayCommand(SortCoursesByLevel);
         }
 
         private bool CanListCoursesData(object obj)
@@ -55,6 +57,36 @@ namespace WPFTutorial.ViewModel
                 }
             }
         }
-        // TODO: The teacher should also be able to list their exams
+
+        private void SortCoursesByCreationDate(object obj)
+        {
+            var sortedCourses = TeacherCourses?.OrderBy(c => c.Id).ToList();
+            TeacherCourses?.Clear();
+            foreach (var course in sortedCourses)
+            {
+                TeacherCourses.Add(course);
+            }
+        }
+
+        private void SortCoursesByLanguage(object obj)
+        {
+            var sortedCourses = TeacherCourses?.OrderBy(c => c.CourseName).ToList();
+            TeacherCourses?.Clear();
+            foreach (var course in sortedCourses)
+            {
+                TeacherCourses.Add(course);
+            }
+        }
+
+        private void SortCoursesByLevel(object obj)
+        {
+            var sortedCourses = TeacherCourses?.OrderBy(c => c.CourseLevel).ToList();
+            TeacherCourses?.Clear();
+            foreach (var course in sortedCourses)
+            {
+                TeacherCourses.Add(course);
+            }
+        }
+        // TODO: The teacher should also be able to list their exams and filter them
     }
 }
