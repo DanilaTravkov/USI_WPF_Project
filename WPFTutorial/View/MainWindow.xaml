@@ -33,13 +33,5 @@
             <Button Style="{StaticResource RoundedButton}" Command="{Binding ShowWindowCommand}" Background="DarkSlateBlue" Foreground="White" Content="Register" Width="100" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="25"/>
             <Button Style="{StaticResource RoundedButton}" Command="{Binding ShowLoginCommand}" Background="DarkSlateBlue" Foreground="White" Content="Login" Width="100" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="25"/>
         </StackPanel>
-        <!-- <ListView Grid.Row="1" x:Name="UserList" Margin="25" ItemsSource="{Binding Users}">
-            <ListView.View >
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Email}" Width="200"/>
-                </GridView>
-            </ListView.View>
-        </ListView> -->
     </Grid>
 </Window>

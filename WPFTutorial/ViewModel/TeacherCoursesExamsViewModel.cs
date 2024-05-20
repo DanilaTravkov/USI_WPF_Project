@@ -20,11 +20,13 @@ namespace WPFTutorial.ViewModel
 
         public ObservableCollection<Course>? TeacherCourses;
 
-        public string? CourseName;
-        public Model.ELevel? CourseLevel;
-        public int? WeeksDuration;
-        public DateTime? StartsAt;
-        public bool? IsOnline;
+        
+
+        // public string? CourseName;
+        // public Model.ELevel? CourseLevel;
+        // public int? WeeksDuration;
+        // public DateTime? StartsAt;
+        // public bool? IsOnline;
 
         public TeacherCoursesExamsViewModel() 
         {
@@ -53,5 +55,6 @@ namespace WPFTutorial.ViewModel
                 }
             }
         }
+        // TODO: The teacher should also be able to list their exams
     }
 }

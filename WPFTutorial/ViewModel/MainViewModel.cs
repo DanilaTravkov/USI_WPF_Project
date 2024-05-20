@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using WPFTutorial.Commands;
 using WPFTutorial.DB;
@@ -44,14 +45,20 @@ namespace WPFTutorial.ViewModel
 
         private void ShowWindow(object obj) // The action function where lays the logic which will be executed when the command is invoked (for example through a button click)
         {
-            AddUser addUserWindow = new AddUser();
-            addUserWindow.Show();
+            //AddUser addUserWindow = new AddUser();
+            // addUserWindow.Show();
+            TeacherOrStudent teacherOrStudent = new WPFTutorial.View.TeacherOrStudent();
+
+            // Get the main window and set its content to the new view
+            Window mainWindow = Application.Current.MainWindow;
+            mainWindow.Content = teacherOrStudent;
+
         }
 
         // Show login window
         private void ShowLogin(object obj)
         {
-            Login login = new Login();
+           Login login = new Login();
             login.Show();
         }
     }

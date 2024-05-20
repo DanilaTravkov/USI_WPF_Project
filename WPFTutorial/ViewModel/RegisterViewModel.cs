@@ -13,9 +13,8 @@ namespace WPFTutorial.ViewModel
 {
 
     // TODO: Change this to LoginViewModel.xaml
-    public class AddUserViewModel
+    public class RegisterViewModel
     {
-
         public ICommand AddUserCommand { get; set; }
         public string? Name {  get; set; }
         public string? Surname {  get; set; }
@@ -25,7 +24,7 @@ namespace WPFTutorial.ViewModel
         public DateTime DateOfBirth {  get; set; }
         public Model.Role Role { get; set; }
 
-        public AddUserViewModel()
+        public RegisterViewModel()
         {
             AddUserCommand = new RelayCommand(AddUser, CanAddUser);
         }

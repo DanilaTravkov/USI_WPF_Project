@@ -10,21 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPFTutorial.ViewModel;
 
 namespace WPFTutorial.View
 {
     /// <summary>
-    /// Interaction logic for AddUser.xaml
+    /// Interaction logic for TeacherOrStudent.xaml
     /// </summary>
-    public partial class AddUser : Window
+    public partial class TeacherOrStudent : UserControl
     {
-        public AddUser()
+        public TeacherOrStudent()
         {
             InitializeComponent();
-            AddUserViewModel addUserViewModel = new AddUserViewModel();
-            this.DataContext = addUserViewModel;
+            TeacherOrStudentViewModel teacherOrStudentViewModel = new TeacherOrStudentViewModel();
+            this.DataContext = teacherOrStudentViewModel;
         }
     }
 }

@@ -33,7 +33,13 @@ namespace WPFTutorial.ViewModel
                 {
                     UserSession.Instance.SetLoggedInUser(user);
                     MessageBox.Show("Login successful!");
-                    // Navigate to the appropriate view
+                    // Create the TeacherCoursesExams view
+                    var teacherCoursesExamsView = new WPFTutorial.View.TeacherCoursesExams();
+
+                    // Get the main window and set its content to the new view
+                    Window mainWindow = Application.Current.MainWindow;
+                    mainWindow.Content = teacherCoursesExamsView;
+
                 }
                 else
                 {
@@ -44,7 +50,7 @@ namespace WPFTutorial.ViewModel
 
         private bool CanSubmit(object obj)
         {
-            return true; // You can add validation logic here
+            return true; // add validation logic here
         }
     }
 

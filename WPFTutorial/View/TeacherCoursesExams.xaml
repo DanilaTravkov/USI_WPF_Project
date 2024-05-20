@@ -7,6 +7,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <ListView ItemsSource="{Binding TeacherCourses}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="100" Header="Course name" DisplayMemberBinding="{Binding CourseName}"/>
+                    <GridViewColumn Width="100" Header="Level" DisplayMemberBinding="{Binding CourseLevel}"/>
+                    <GridViewColumn Width="100" Header="Duration (weeks)" DisplayMemberBinding="{Binding WeeksDuration}"/>
+                    <GridViewColumn Width="100" Header="Starts at" DisplayMemberBinding="{Binding StartsAt}"/>
+                    <GridViewColumn Width="100" Header="Is online" DisplayMemberBinding="{Binding IsOnline}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>
