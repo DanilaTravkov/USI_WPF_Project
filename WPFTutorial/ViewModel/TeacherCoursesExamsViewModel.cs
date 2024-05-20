@@ -32,9 +32,24 @@ namespace WPFTutorial.ViewModel
             // SeeExamsCommand = new RelayCommand();
 
 
-            SortCoursesByCreationDateCommand = new RelayCommand(SortCoursesByCreationDate);
-            SortCoursesByLanguageCommand = new RelayCommand(SortCoursesByLanguage);
-            SortCoursesByLevelCommand = new RelayCommand(SortCoursesByLevel);
+            SortCoursesByCreationDateCommand = new RelayCommand(SortCoursesByCreationDate, CanSortCoursesByCreationDate);
+            SortCoursesByLanguageCommand = new RelayCommand(SortCoursesByLanguage, CanSortCoursesByLanguage);
+            SortCoursesByLevelCommand = new RelayCommand(SortCoursesByLevel, CanSortCoursesByLevel);
+        }
+
+        private bool CanSortCoursesByCreationDate(object obj)
+        {
+            return true;
+        }
+
+        private bool CanSortCoursesByLanguage(object obj)
+        {
+            return true;
+        }
+
+        private bool CanSortCoursesByLevel(object obj)
+        {
+            return true;
         }
 
         private bool CanListCoursesData(object obj)
