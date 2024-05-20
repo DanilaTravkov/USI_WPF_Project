@@ -6,26 +6,46 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WPFTutorial.Commands;
+using WPFTutorial.DB;
+using WPFTutorial.Model;
+using WPFTutorial.Session;
 
 namespace WPFTutorial.ViewModel
 {
     public class LoginViewModel
     {
-        public ICommand SubmitLoginCommand { get; set; } // Instead of events we use commands
+        public ICommand SubmitLoginCommand { get; set; }
 
-        public LoginViewModel() 
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+
+        public LoginViewModel()
         {
             SubmitLoginCommand = new RelayCommand(Submit, CanSubmit);
         }
 
         private void Submit(object obj)
         {
-            MessageBox.Show("LOGIC ATTEMPTED LMAO");
+            using (var dbContext = new DatabaseContext())
+            {
+                var user = dbContext.Users.FirstOrDefault(u => u.Email == Email && u.Password == Password);
+                if (user != null)
+                {
+                    UserSession.Instance.SetLoggedInUser(user);
+                    MessageBox.Show("Login successful!");
+                    // Navigate to the appropriate view
+                }
+                else
+                {
+                    MessageBox.Show("Invalid credentials");
+                }
+            }
         }
 
         private bool CanSubmit(object obj)
         {
-            return true;
+            return true; // You can add validation logic here
         }
     }
+
 }

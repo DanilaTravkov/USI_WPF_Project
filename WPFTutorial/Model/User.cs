@@ -25,7 +25,7 @@ namespace WPFTutorial.Model
             Role = role;
         }
         [Key] // decorator to make Id a unique field
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string? Name { get; set; }
         public string? Surname { get; set; }
         public string? Email { get; set; }
