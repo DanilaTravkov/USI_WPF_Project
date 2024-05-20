@@ -10,7 +10,7 @@ namespace WPFTutorial.Model
 {
 
     // Update 19.05 migrations are fixed 
-    public enum Role { TEACHER, STUDENT, ADMIN }
+    public enum Role { TEACHER = 1, STUDENT = 2, ADMIN = 3 }
 
     public class User
     {

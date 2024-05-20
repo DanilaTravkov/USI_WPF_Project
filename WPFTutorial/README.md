@@ -35,10 +35,13 @@ https://docs.microsoft.com/ef/core/
 https://learn.microsoft.com/ru-ru/ef/core/
 
 ------------------------------------------------------------------------------------------------------------------------------------------
-
 3. After you make ANY changes to entities (classes in Model folder) you have to create and apply migrations to ensure that the database is up-to-date with the code:
 
 -1. Navigate to Tools > NuGet Package Manager > Package Manager Console
 -2. Create a migration, run: add-migration "migration name"
 -3. Apply migrations, run: update-database
 -4. Enjoy life!
+
+------------------------------------------------------------------------------------------------------------------------------------------
+4. WPF does not provide session storing so to keep the current logged-in user I've created the UserSession class in Session folder with a static field which represent a singleton object of a user session.
+Use it to get data about the current user.

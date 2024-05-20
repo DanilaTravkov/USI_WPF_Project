@@ -7,7 +7,7 @@ using WPFTutorial.Model;
 
 namespace WPFTutorial.Session
 {
-    // Since WPF does not have sessions we create one using a singleton pattern (there can only be one instance of UserSession object per app launch)
+    // Since WPF does not have sessions we create one using a singleton pattern (there can only be one instance of UserSession object per launch)
     public class UserSession
     {
         private static UserSession _Instance;
