@@ -24,8 +24,10 @@ namespace WPFTutorial.ViewModel
         {
             using (var dbContext = new DatabaseContext())
             {
-                var teacher = dbContext.Teachers.FirstOrDefault(t => t.Email == Email && t.Password == Password);
-                var student = dbContext.Students.FirstOrDefault(s => s.Email == Email && s.Password == Password);
+                var teacher = dbContext.Teachers
+                    .FirstOrDefault(t => t.Email.ToLower() == Email.ToLower() && t.Password == Password);
+                var student = dbContext.Students
+                    .FirstOrDefault(s => s.Email.ToLower() == Email.ToLower() && s.Password == Password);
 
                 if (teacher != null)
                 {
