@@ -45,7 +45,7 @@ namespace WPFTutorial.ViewModel
                 if (UserSession.Instance.LoggedInUser is Teacher teacher)
                 {
                     var courses = dbContext.Courses
-                    .Include(c => c.Teacher) // We include the teacher to ensure the data is loaded
+                    .Include(c => c.Teacher)
                     .Where(c => c.TeacherId == teacher.Id)
                     .ToList();
  

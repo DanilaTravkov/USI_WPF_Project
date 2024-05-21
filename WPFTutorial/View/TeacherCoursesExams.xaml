@@ -8,6 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel>
+            <TextBlock Margin="5"  Text="You are logged in as TEACHER"/>
             <StackPanel Orientation="Horizontal">
                 <Button Width="150" Content="Sort by Creation Date" Command="{Binding SortCoursesByCreationDateCommand}" />
                 <Button Width="150" Content="Sort by Language" Command="{Binding SortCoursesByLanguageCommand}" />
