@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using WPFTutorial.Commands;
@@ -28,18 +24,25 @@ namespace WPFTutorial.ViewModel
         {
             using (var dbContext = new DatabaseContext())
             {
-                var user = dbContext.Users.FirstOrDefault(u => u.Email == Email && u.Password == Password);
-                if (user != null)
-                {
-                    UserSession.Instance.SetLoggedInUser(user);
-                    MessageBox.Show("Login successful!");
-                    // Create the TeacherCoursesExams view
-                    var teacherCoursesExamsView = new WPFTutorial.View.TeacherCoursesExams();
+                var teacher = dbContext.Teachers.FirstOrDefault(t => t.Email == Email && t.Password == Password);
+                var student = dbContext.Students.FirstOrDefault(s => s.Email == Email && s.Password == Password);
 
-                    // Get the main window and set its content to the new view
+                if (teacher != null)
+                {
+                    UserSession.Instance.SetLoggedInUser(teacher);
+                    MessageBox.Show("Login successful!");
+
+                    // Create the TeacherCoursesExams view if the logged-in user is a teacher
+                    var teacherCoursesExamsView = new WPFTutorial.View.TeacherCoursesExams();
                     Window mainWindow = Application.Current.MainWindow;
                     mainWindow.Content = teacherCoursesExamsView;
+                }
+                else if (student != null)
+                {
+                    UserSession.Instance.SetLoggedInUser(student);
+                    MessageBox.Show("Login successful!");
 
+                    // Handle student-specific logic if needed
                 }
                 else
                 {
@@ -50,8 +53,7 @@ namespace WPFTutorial.ViewModel
 
         private bool CanSubmit(object obj)
         {
-            return true; // add validation logic here
+            return true;
         }
     }
-
 }

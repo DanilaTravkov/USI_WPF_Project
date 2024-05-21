@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WPFTutorial.Commands;
@@ -11,8 +7,6 @@ using WPFTutorial.Model;
 
 namespace WPFTutorial.ViewModel
 {
-
-    // TODO: Change this to LoginViewModel.xaml
     public class RegisterTeacherViewModel
     {
         public ICommand AddTeacherCommand { get; set; }
@@ -36,29 +30,27 @@ namespace WPFTutorial.ViewModel
 
         private void AddTeacher(object obj)
         {
-            if (string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Gender))
+            if (!CanAddTeacher(obj))
             {
                 MessageBox.Show("Some input(s) are empty!");
+                return;
             }
-            else
+
+            var newTeacher = new Teacher(Name, Surname, Email, Password, Gender, DateOfBirth, Role);
+
+            using (var dbContext = new DatabaseContext())
             {
-
-                Teacher newTeacher = new Teacher(Name, Surname, Email, Password, Gender, DateOfBirth, Role); // When a new teacher is created they don't have any related courses yet
-
-                using (DatabaseContext dbContext = new DatabaseContext())
-                {
-                    dbContext.Teachers.Add(newTeacher);
-                    dbContext.SaveChanges();
-                    MessageBox.Show("Succsessfully created a new teacher");
-                }
-
-                Name = null;
-                Surname = null;
-                Email = null;
-                Password = null;
-                Gender = null;
-                DateOfBirth = default;
+                dbContext.Teachers.Add(newTeacher);
+                dbContext.SaveChanges();
+                MessageBox.Show("Successfully created a new teacher");
             }
+
+            Name = null;
+            Surname = null;
+            Email = null;
+            Password = null;
+            Gender = null;
+            DateOfBirth = default;
         }
     }
 }

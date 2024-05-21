@@ -12,7 +12,7 @@
                 <Button Width="150" Content="Sort by Creation Date" Command="{Binding SortCoursesByCreationDateCommand}" />
                 <Button Width="150" Content="Sort by Language" Command="{Binding SortCoursesByLanguageCommand}" />
                 <Button Width="150" Content="Sort by Level" Command="{Binding SortCoursesByLevelCommand}" />
-                <Button Width="150" Content="Create a course" Command="{Binding CreateCourseCommand}" />
+                <Button Width="150" Content="Create a course" Command="{Binding ShowCreateCourseCommand}" />
             </StackPanel>
             <ListView ItemsSource="{Binding TeacherCourses}">
                 <ListView.View>

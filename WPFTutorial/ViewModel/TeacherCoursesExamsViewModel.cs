@@ -1,14 +1,17 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using WPFTutorial.Commands;
 using WPFTutorial.DB;
 using WPFTutorial.Model;
 using WPFTutorial.Session;
+using WPFTutorial.View;
 
 namespace WPFTutorial.ViewModel
 {
@@ -24,19 +27,35 @@ namespace WPFTutorial.ViewModel
         public ICommand SortCoursesByLevelCommand { get; set; }
         public ICommand ShowCreateCourseCommand { get; set; }
 
-        public ObservableCollection<Course>? TeacherCourses;
+        public ObservableCollection<Course>? TeacherCourses { get; set; }
 
         public TeacherCoursesExamsViewModel() 
         {
             TeacherCourses = new ObservableCollection<Course>();
-            SeeCoursesCommand = new RelayCommand(ListCoursesData, CanListCoursesData);
+            // SeeCoursesCommand = new RelayCommand(ListCoursesData, CanListCoursesData);
             // SeeExamsCommand = new RelayCommand();
-
 
             SortCoursesByCreationDateCommand = new RelayCommand(SortCoursesByCreationDate, CanSortCoursesByCreationDate);
             SortCoursesByLanguageCommand = new RelayCommand(SortCoursesByLanguage, CanSortCoursesByLanguage);
             SortCoursesByLevelCommand = new RelayCommand(SortCoursesByLevel, CanSortCoursesByLevel);
             ShowCreateCourseCommand = new RelayCommand(ShowCreateCourse, CanCreateCourse);
+
+            using (DatabaseContext dbContext = new DatabaseContext())
+            {
+                if (UserSession.Instance.LoggedInUser is Teacher teacher)
+                {
+                    var courses = dbContext.Courses
+                    .Include(c => c.Teacher) // We include the teacher to ensure the data is loaded
+                    .Where(c => c.TeacherId == teacher.Id)
+                    .ToList();
+ 
+                    TeacherCourses?.Clear();
+                    foreach (var course in courses)
+                    {
+                        TeacherCourses?.Add(course);
+                    }
+                }
+            }
         }
 
         private bool CanCreateCourse(object obj)
@@ -46,8 +65,9 @@ namespace WPFTutorial.ViewModel
 
         private void ShowCreateCourse(object obj)
         {
-            // TODO
-            throw new NotImplementedException();
+            CreateCourse createCourse = new CreateCourse();
+            Window mainWindow = Application.Current.MainWindow;
+            mainWindow.Content = createCourse;
         }
 
         private bool CanSortCoursesByCreationDate(object obj)
@@ -72,18 +92,7 @@ namespace WPFTutorial.ViewModel
 
         private void ListCoursesData(object obj)
         {
-            using (DatabaseContext dbContext = new DatabaseContext()) 
-            {
-                if (UserSession.Instance.LoggedInUser is Teacher teacher)
-                {
-                    var courses = dbContext.Courses.Where(c => c.Teacher.Id == teacher.Id).ToList();
-                    TeacherCourses?.Clear();
-                    foreach (var course in courses)
-                    {
-                        TeacherCourses?.Add(course);
-                    }
-                }
-            }
+           
         }
 
         private void SortCoursesByCreationDate(object obj)

@@ -5,11 +5,9 @@ namespace WPFTutorial.DB
 {
     public class DatabaseContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
-        public DbSet<Course> Courses { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }
-
-        public DbSet<Teacher> Teachers {  get; set; }
+        public DbSet<Course> Courses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -18,19 +16,20 @@ namespace WPFTutorial.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .HasDiscriminator<string>("Discriminator")
-                .HasValue<User>("User")
-                .HasValue<Student>("Student")
-                .HasValue<Teacher>("Teacher");
+            modelBuilder.Entity<Teacher>()
+                .HasMany(t => t.Courses)  // Change to HasMany
+                .WithOne(c => c.Teacher)
+                .HasForeignKey(c => c.TeacherId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            // Configure one-to-many relationship
             modelBuilder.Entity<Student>()
                 .HasOne(s => s.Course)
                 .WithMany(c => c.Students)
-                .HasForeignKey(s => s.CourseId); // Assuming you have a foreign key in Student class
+                .HasForeignKey(s => s.CourseId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }

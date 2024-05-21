@@ -26,7 +26,6 @@ namespace WPFTutorial.ViewModel
         {
             using (DatabaseContext dbContext = new DatabaseContext())
             {
-                Users = new ObservableCollection<User>(dbContext.Users.ToList()); // Display all users on the MainWindow.xaml
 
                 ShowWindowCommand = new RelayCommand(ShowWindow, CanShowWindow); // We assign an instance of a RelayCommand to the command and pass the action function as the first param
                 ShowLoginCommand = new RelayCommand(ShowLogin, CanShowLogin);
@@ -45,8 +44,6 @@ namespace WPFTutorial.ViewModel
 
         private void ShowWindow(object obj) // The action function where lays the logic which will be executed when the command is invoked (for example through a button click)
         {
-            //AddUser addUserWindow = new AddUser();
-            // addUserWindow.Show();
             TeacherOrStudent teacherOrStudent = new WPFTutorial.View.TeacherOrStudent();
 
             // Get the main window and set its content to the new view

@@ -11,8 +11,8 @@ using WPFTutorial.DB;
 namespace WPFTutorial.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240520201438_Added one-to-many to Course-Student")]
-    partial class AddedonetomanytoCourseStudent
+    [Migration("20240521113946_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,9 +22,9 @@ namespace WPFTutorial.Migrations
 
             modelBuilder.Entity("WPFTutorial.Model.Course", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("CourseLevel")
                         .HasColumnType("INTEGER");
@@ -38,11 +38,11 @@ namespace WPFTutorial.Migrations
                     b.Property<int?>("MaxStudents")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateOnly?>("StartsAt")
+                    b.Property<DateTime?>("StartsAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("TeacherId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("WeekDays")
                         .IsRequired()
@@ -53,23 +53,22 @@ namespace WPFTutorial.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TeacherId");
+                    b.HasIndex("TeacherId")
+                        .IsUnique();
 
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("WPFTutorial.Model.User", b =>
+            modelBuilder.Entity("WPFTutorial.Model.Student", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(8)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -92,37 +91,48 @@ namespace WPFTutorial.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
-
-                    b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("WPFTutorial.Model.Student", b =>
-                {
-                    b.HasBaseType("WPFTutorial.Model.User");
-
-                    b.Property<Guid>("CourseId")
-                        .HasColumnType("TEXT");
-
                     b.HasIndex("CourseId");
 
-                    b.HasDiscriminator().HasValue("Student");
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("WPFTutorial.Model.Teacher", b =>
                 {
-                    b.HasBaseType("WPFTutorial.Model.User");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.HasDiscriminator().HasValue("Teacher");
+                    b.Property<DateTime?>("DateOfBirth")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("WPFTutorial.Model.Course", b =>
                 {
                     b.HasOne("WPFTutorial.Model.Teacher", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId")
+                        .WithOne("Course")
+                        .HasForeignKey("WPFTutorial.Model.Course", "TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -143,6 +153,12 @@ namespace WPFTutorial.Migrations
             modelBuilder.Entity("WPFTutorial.Model.Course", b =>
                 {
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("WPFTutorial.Model.Teacher", b =>
+                {
+                    b.Navigation("Course")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

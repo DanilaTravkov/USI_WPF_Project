@@ -24,11 +24,11 @@ namespace WPFTutorial.Model
             ClassDuration = new TimeOnly(1, 30);
         }
         [Key]
-        public Guid? Id { get; set; }
+        public int Id { get; set; }
         public ELevel CourseLevel {  get; set; }
         public int? WeeksDuration {  get; set; }
         public List<WeekDays> WeekDays { get; set; }
-        public DateOnly? StartsAt {  get; set; }
+        public DateTime? StartsAt {  get; set; }
         public bool? IsOnline {  get; set; }
         public int? MaxStudents { get; set; } = 0; // Add max students which can attend this course IF IsOnline is false
         public TimeOnly ClassDuration { get; } = new TimeOnly(1, 30); // 1 hour and 30 minutes (90 minutes)
@@ -36,8 +36,9 @@ namespace WPFTutorial.Model
 
         // relational fields
 
-        private Teacher _Teacher; // Teacher assosiated with this course
-        public Teacher Teacher { get { return _Teacher; } set { _Teacher = value; } }
+        public Teacher Teacher {  get; set; }
+        public int TeacherId { get; set; }
+
         public ICollection<Student> Students { get; set; } = new List<Student>(); // A course can have many students
 
     }
