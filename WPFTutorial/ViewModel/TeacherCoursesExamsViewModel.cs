@@ -97,7 +97,7 @@ namespace WPFTutorial.ViewModel
 
         private void SortCoursesByCreationDate(object obj)
         {
-            var sortedCourses = TeacherCourses?.OrderBy(c => c.Id).ToList();
+            var sortedCourses = TeacherCourses?.OrderBy(c => c.StartsAt).ToList(); // TODO: instead of StartsAt field create a new one CreatedAt, assign DateTime.Now to it in constructor
             TeacherCourses?.Clear();
             foreach (var course in sortedCourses)
             {

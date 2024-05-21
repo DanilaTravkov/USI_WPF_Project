@@ -55,5 +55,5 @@ password: 123
 
 Log in as a student:
 
-login:
-password:
+login: test@gmail.com
+password: 123

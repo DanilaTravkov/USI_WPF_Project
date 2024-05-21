@@ -44,7 +44,9 @@ namespace WPFTutorial.ViewModel
                     UserSession.Instance.SetLoggedInUser(student);
                     MessageBox.Show("Login successful!");
 
-                    // Handle student-specific logic if needed
+                    var studentCoursesExamsView = new WPFTutorial.View.StudentCoursesExams();
+                    Window mainWindow = Application.Current.MainWindow;
+                    mainWindow.Content = studentCoursesExamsView;
                 }
                 else
                 {

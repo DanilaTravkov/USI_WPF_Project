@@ -33,7 +33,7 @@ namespace WPFTutorial.Model
 
         // This field is for determining how the user should be authorized
         public Role Role { get; set; }
-        public int CourseId { get; set; }
+        public int? CourseId { get; set; }
 
         // relational fields
         public Course Course { get; set; } // TODO: A student can have only one course

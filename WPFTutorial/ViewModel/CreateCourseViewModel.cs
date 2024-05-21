@@ -143,7 +143,7 @@ namespace WPFTutorial.ViewModel
                         Course newCourse = new Course
                         {
                             TeacherId = loggedInTeacher.Id, // Ensure TeacherId is set
-                            CourseLevel = CourseLevel,
+                            CourseLevel = CourseLevel, // TODO: Fix A1 being assigned to every course ingoring user's choice
                             WeeksDuration = WeeksDuration,
                             StartsAt = StartsAt,
                             IsOnline = IsOnline,

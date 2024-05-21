@@ -7,6 +7,7 @@ using WPFTutorial.Model;
 
 namespace WPFTutorial.ViewModel
 {
+    // CRUD Create for Teacher
     public class RegisterTeacherViewModel
     {
         public ICommand AddTeacherCommand { get; set; }
