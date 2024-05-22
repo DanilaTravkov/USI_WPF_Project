@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using WPFTutorial.Commands;
@@ -15,9 +14,18 @@ using WPFTutorial.View;
 
 namespace WPFTutorial.ViewModel
 {
-    // Predavac 1, 3
-    public class TeacherCoursesExamsViewModel
+    public class TeacherCoursesExamsViewModel : INotifyPropertyChanged
     {
+        private Course selectedCourse;
+        public Course SelectedCourse
+        {
+            get => selectedCourse;
+            set
+            {
+                selectedCourse = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ICommand? SeeCoursesCommand { get; set; }
         public ICommand? SeeExamsCommand { get; set; }
@@ -26,33 +34,33 @@ namespace WPFTutorial.ViewModel
         public ICommand SortCoursesByLanguageCommand { get; set; }
         public ICommand SortCoursesByLevelCommand { get; set; }
         public ICommand ShowCreateCourseCommand { get; set; }
+        public ICommand ShowUpdateSelectedCourseCommand { get; set; }
 
-        public ObservableCollection<Course>? TeacherCourses { get; set; }
+        public ObservableCollection<Course> TeacherCourses { get; set; }
 
-        public TeacherCoursesExamsViewModel() 
+        public TeacherCoursesExamsViewModel()
         {
             TeacherCourses = new ObservableCollection<Course>();
-            // SeeCoursesCommand = new RelayCommand(ListCoursesData, CanListCoursesData);
-            // SeeExamsCommand = new RelayCommand();
 
             SortCoursesByCreationDateCommand = new RelayCommand(SortCoursesByCreationDate, CanSortCoursesByCreationDate);
             SortCoursesByLanguageCommand = new RelayCommand(SortCoursesByLanguage, CanSortCoursesByLanguage);
             SortCoursesByLevelCommand = new RelayCommand(SortCoursesByLevel, CanSortCoursesByLevel);
             ShowCreateCourseCommand = new RelayCommand(ShowCreateCourse, CanCreateCourse);
+            ShowUpdateSelectedCourseCommand = new RelayCommand(UpdateSelectedCourse, CanUpdateSelectedCourse);
 
-            using (DatabaseContext dbContext = new DatabaseContext())
+            using (var dbContext = new DatabaseContext())
             {
                 if (UserSession.Instance.LoggedInUser is Teacher teacher)
                 {
                     var courses = dbContext.Courses
-                    .Include(c => c.Teacher)
-                    .Where(c => c.TeacherId == teacher.Id)
-                    .ToList();
- 
-                    TeacherCourses?.Clear();
+                        .Include(c => c.Teacher)
+                        .Where(c => c.TeacherId == teacher.Id)
+                        .ToList();
+
+                    TeacherCourses.Clear();
                     foreach (var course in courses)
                     {
-                        TeacherCourses?.Add(course);
+                        TeacherCourses.Add(course);
                     }
                 }
             }
@@ -85,19 +93,28 @@ namespace WPFTutorial.ViewModel
             return true;
         }
 
-        private bool CanListCoursesData(object obj)
+        private bool CanUpdateSelectedCourse(object obj)
         {
-            return UserSession.Instance.IsTeacher(); // Only works if the logged in user is a teacher
+            return true;
         }
 
-        private void ListCoursesData(object obj)
+        private void UpdateSelectedCourse(object obj)
         {
-           
+            if (SelectedCourse != null)
+            {
+                UpdateCourse updateCourse = new UpdateCourse(SelectedCourse);
+                Window mainWindow = Application.Current.MainWindow;
+                mainWindow.Content = updateCourse;
+            }
+            else
+            {
+                MessageBox.Show("Please select a course you would like to update");
+            }
         }
 
         private void SortCoursesByCreationDate(object obj)
         {
-            var sortedCourses = TeacherCourses?.OrderBy(c => c.StartsAt).ToList(); // TODO: instead of StartsAt field create a new one CreatedAt, assign DateTime.Now to it in constructor
+            var sortedCourses = TeacherCourses?.OrderBy(c => c.StartsAt).ToList();
             TeacherCourses?.Clear();
             foreach (var course in sortedCourses)
             {
@@ -124,6 +141,11 @@ namespace WPFTutorial.ViewModel
                 TeacherCourses.Add(course);
             }
         }
-        // TODO: The teacher should also be able to list their exams and filter them
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

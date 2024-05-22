@@ -8,14 +8,15 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel>
-            <TextBlock Margin="5"  Text="You are logged in as TEACHER"/>
+            <TextBlock Margin="5" Text="You are logged in as TEACHER"/>
             <StackPanel Orientation="Horizontal">
                 <Button Width="150" Content="Sort by Creation Date" Command="{Binding SortCoursesByCreationDateCommand}" />
                 <Button Width="150" Content="Sort by Language" Command="{Binding SortCoursesByLanguageCommand}" />
                 <Button Width="150" Content="Sort by Level" Command="{Binding SortCoursesByLevelCommand}" />
+                <Button Width="150" Content="Update selected course" Command="{Binding ShowUpdateSelectedCourseCommand}" />
                 <Button Width="150" Content="Create a course" Command="{Binding ShowCreateCourseCommand}" />
             </StackPanel>
-            <ListView ItemsSource="{Binding TeacherCourses}">
+            <ListView ItemsSource="{Binding TeacherCourses}" SelectedItem="{Binding SelectedCourse}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="100" Header="Course name" DisplayMemberBinding="{Binding CourseName}"/>
