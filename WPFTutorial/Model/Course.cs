@@ -30,7 +30,7 @@ namespace WPFTutorial.Model
         public List<WeekDays> WeekDays { get; set; }
         public DateTime? StartsAt { get; set; }
         public bool? IsOnline {  get; set; }
-        public int? MaxStudents { get; set; } = 0; // Add max students which can attend this course IF IsOnline is false
+        public int? MaxStudents { get; set; } = 0; // TODO: Add max students which can attend this course IF IsOnline is false
         public TimeOnly ClassDuration { get; } = new TimeOnly(1, 30); // 1 hour and 30 minutes (90 minutes)
         public string? CourseName {  get; set; }
 

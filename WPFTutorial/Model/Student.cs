@@ -11,7 +11,7 @@ namespace WPFTutorial.Model
     {
 
         public Student(string name, string surname, string email, string password, string gender, DateTime? dateOfBirth, Role role)
-        
+
         {
             Name = name;
             Surname = surname;
@@ -36,8 +36,9 @@ namespace WPFTutorial.Model
         public int? CourseId { get; set; }
 
         // relational fields
-        public Course Course { get; set; } // TODO: A student can have only one course
+        public Course Course { get; set; } // TODO: A student can have only one course. Updated by teacher only if that Course was in HasStudentApplied with value true
         // public IDictionary<string, Model.ELevel> LanguageLevel { get; set; } = new Dictionary<string, Model.ELevel>();
+        public IDictionary<Course, bool> HasStudentApplied { get; set; } // If bool value with key Course is set to true, it means the student has applied for that course
 
     }
 }
