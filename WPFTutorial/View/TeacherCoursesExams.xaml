@@ -10,6 +10,9 @@
         <StackPanel>
             <TextBlock Margin="5" Text="You are logged in as TEACHER"/>
             <StackPanel Orientation="Horizontal">
+                <Button Content="See exams" Width="150" Command="{Binding ShowExamsCommand}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <Button Width="150" Content="Sort by Creation Date" Command="{Binding SortCoursesByCreationDateCommand}" />
                 <Button Width="150" Content="Sort by Language" Command="{Binding SortCoursesByLanguageCommand}" />
                 <Button Width="150" Content="Sort by Level" Command="{Binding SortCoursesByLevelCommand}" />

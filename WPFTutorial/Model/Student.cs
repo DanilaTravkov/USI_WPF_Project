@@ -38,7 +38,7 @@ namespace WPFTutorial.Model
         // relational fields
         public Course Course { get; set; } // TODO: A student can have only one course. Updated by teacher only if that Course was in HasStudentApplied with value true
         // public IDictionary<string, Model.ELevel> LanguageLevel { get; set; } = new Dictionary<string, Model.ELevel>();
-        public IDictionary<Course, bool> HasStudentApplied { get; set; } // If bool value with key Course is set to true, it means the student has applied for that course
+        // public IDictionary<Course, bool> HasStudentApplied { get; set; } // If bool value with key Course is set to true, it means the student has applied for that course
 
     }
 }
