@@ -8,6 +8,10 @@
     <Grid>
         <StackPanel>
             <TextBlock Margin="5" Text="Course Applications"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="left">
+                <Button Content="Accept" Command="{Binding AcceptStudentCommand}" Width="100"/>
+                <Button Content="Deny" Command="{Binding DenyStudentCommand}" Width="100"/>
+            </StackPanel>
             <ListView ItemsSource="{Binding CourseApplications}" SelectedItem="{Binding SelectedApplication}">
                 <ListView.View>
                     <GridView>
@@ -17,10 +21,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <StackPanel Orientation="Horizontal">
-                <Button Content="Accept" Command="{Binding AcceptStudentCommand}" />
-                <Button Content="Deny" Command="{Binding DenyStudentCommand}" />
-            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -10,6 +10,7 @@ using WPFTutorial.Commands;
 using WPFTutorial.DB;
 using WPFTutorial.Model;
 using WPFTutorial.Session;
+using WPFTutorial.View;
 
 namespace WPFTutorial.ViewModel
 {
@@ -28,11 +29,13 @@ namespace WPFTutorial.ViewModel
 
         public ObservableCollection<Course> AvailableCourses { get; set; }
         public ICommand EnrollCourseCommand { get; set; }
+        public ICommand SeeMyApplicationsCommand { get; set; }
 
         public StudentCoursesExamsViewModel()
         {
             AvailableCourses = new ObservableCollection<Course>();
             EnrollCourseCommand = new RelayCommand(EnrollCourse, CanEnrollCourse);
+            SeeMyApplicationsCommand = new RelayCommand(SeeMyApplications, CanSeeMyApplications);
 
             using (var dbContext = new DatabaseContext())
             {
@@ -56,6 +59,18 @@ namespace WPFTutorial.ViewModel
                 }
             }
         }
+
+        private bool CanSeeMyApplications(object obj)
+        {
+            return true;
+        }
+
+        private void SeeMyApplications(object obj)
+        {
+            MyApplications myApplications = new WPFTutorial.View.MyApplications();
+            Application.Current.MainWindow.Content = myApplications;
+        }
+
 
         private bool CanEnrollCourse(object obj)
         {
@@ -95,6 +110,8 @@ namespace WPFTutorial.ViewModel
                 }
             }
         }
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
