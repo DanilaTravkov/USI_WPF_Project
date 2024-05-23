@@ -10,11 +10,13 @@
         <StackPanel>
             <TextBlock Margin="5" Text="You are logged in as STUDENT"/>
             <StackPanel Orientation="Horizontal">
-                <Button Width="150" Content="Sort by Creation Date" Command="{Binding EntrollCourseCommand}" />
-                <Button Width="150" Content="Sort by Language" Command="{Binding SortCoursesByCourseName}" />
-                <Button Width="150" Content="Sort by Level" Command="{Binding SortCoursesByAvailabilityCommand}" />
+                <Button Width="150" Content="Enroll in Course" Command="{Binding EnrollCourseCommand}" />
+                <Button Width="150" Content="Sort by Creation Date" Command="{Binding SortCoursesByCreationDateCommand}" />
+                <Button Width="150" Content="Sort by Language" Command="{Binding SortCoursesByCourseNameCommand}" />
+                <Button Width="150" Content="Sort by Level" Command="{Binding SortCoursesByLevelCommand}" />
+                <Button Width="150" Content="See My Applications" Command="{Binding SeeMyApplicationsCommand}" />
             </StackPanel>
-            <ListView ItemsSource="{Binding AvailableCourses}">
+            <ListView ItemsSource="{Binding AvailableCourses}" SelectedItem="{Binding SelectedCourse}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="100" Header="Course name" DisplayMemberBinding="{Binding CourseName}"/>

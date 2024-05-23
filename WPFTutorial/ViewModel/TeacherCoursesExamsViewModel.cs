@@ -35,6 +35,7 @@ namespace WPFTutorial.ViewModel
         public ICommand SortCoursesByLevelCommand { get; set; }
         public ICommand ShowCreateCourseCommand { get; set; }
         public ICommand ShowUpdateSelectedCourseCommand { get; set; }
+        public ICommand ViewCourseApplicationsCommand { get; set; }
 
         public ObservableCollection<Course> TeacherCourses { get; set; }
 
@@ -47,7 +48,13 @@ namespace WPFTutorial.ViewModel
             SortCoursesByLevelCommand = new RelayCommand(SortCoursesByLevel, CanSortCoursesByLevel);
             ShowCreateCourseCommand = new RelayCommand(ShowCreateCourse, CanCreateCourse);
             ShowUpdateSelectedCourseCommand = new RelayCommand(UpdateSelectedCourse, CanUpdateSelectedCourse);
+            ViewCourseApplicationsCommand = new RelayCommand(ViewCourseApplications, CanViewCourseApplications); 
 
+            LoadTeacherCourses();
+        }
+
+        private void LoadTeacherCourses()
+        {
             using (var dbContext = new DatabaseContext())
             {
                 if (UserSession.Instance.LoggedInUser is Teacher teacher)
@@ -111,6 +118,27 @@ namespace WPFTutorial.ViewModel
                 MessageBox.Show("Please select a course you would like to update");
             }
         }
+
+        private bool CanViewCourseApplications(object obj)
+        {
+            return true;
+        }
+
+        private void ViewCourseApplications(object obj)
+        {
+            if (SelectedCourse != null)
+            {
+                MessageBox.Show($"Navigating to applications for course: {SelectedCourse.CourseName}");
+                ViewCourseApplications viewCourseApplications = new ViewCourseApplications(SelectedCourse);
+                Window mainWindow = Application.Current.MainWindow;
+                mainWindow.Content = viewCourseApplications;
+            }
+            else
+            {
+                MessageBox.Show("Please select a course to view applications");
+            }
+        }
+
 
         private void SortCoursesByCreationDate(object obj)
         {

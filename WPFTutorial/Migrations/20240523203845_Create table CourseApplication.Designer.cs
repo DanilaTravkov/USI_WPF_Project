@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WPFTutorial.DB;
 
@@ -10,9 +11,11 @@ using WPFTutorial.DB;
 namespace WPFTutorial.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240523203845_Create table CourseApplication")]
+    partial class CreatetableCourseApplication
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.5");
@@ -100,6 +103,7 @@ namespace WPFTutorial.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("DenialMessage")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool?>("IsAccepted")

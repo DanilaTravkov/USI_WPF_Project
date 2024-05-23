@@ -8,6 +8,7 @@ namespace WPFTutorial.DB
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseApplication> CourseApplications { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -16,20 +17,32 @@ namespace WPFTutorial.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configuring Teacher to Course relationship
             modelBuilder.Entity<Teacher>()
-                .HasMany(t => t.Courses)  // Change to HasMany
+                .HasMany(t => t.Courses)
                 .WithOne(c => c.Teacher)
                 .HasForeignKey(c => c.TeacherId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // Configuring Student to Course relationship
             modelBuilder.Entity<Student>()
                 .HasOne(s => s.Course)
                 .WithMany(c => c.Students)
                 .HasForeignKey(s => s.CourseId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // Configuring CourseApplication relationships
+            modelBuilder.Entity<CourseApplication>()
+                .HasOne(ca => ca.Student)
+                .WithMany(s => s.CourseApplications)
+                .HasForeignKey(ca => ca.StudentId);
+
+            modelBuilder.Entity<CourseApplication>()
+                .HasOne(ca => ca.Course)
+                .WithMany(c => c.CourseApplications)
+                .HasForeignKey(ca => ca.CourseId);
+
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }

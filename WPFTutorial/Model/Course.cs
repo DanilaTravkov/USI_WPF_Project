@@ -22,6 +22,8 @@ namespace WPFTutorial.Model
         public Course()
         {
             ClassDuration = new TimeOnly(1, 30);
+            CourseApplications = new List<CourseApplication>();
+
         }
         [Key]
         public int Id { get; set; }
@@ -40,6 +42,8 @@ namespace WPFTutorial.Model
         public int TeacherId { get; set; }
 
         public ICollection<Student> Students { get; set; } = new List<Student>(); // A course can have many students
+        public ICollection<CourseApplication> CourseApplications { get; set; }
+
 
     }
 }

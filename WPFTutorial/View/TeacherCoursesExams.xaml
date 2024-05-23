@@ -18,11 +18,13 @@
                 <Button Width="150" Content="Sort by Level" Command="{Binding SortCoursesByLevelCommand}" />
                 <Button Width="150" Content="Update selected course" Command="{Binding ShowUpdateSelectedCourseCommand}" />
                 <Button Width="150" Content="Create a course" Command="{Binding ShowCreateCourseCommand}" />
+                <Button Width="150" Content="View Applications" Command="{Binding ViewCourseApplicationsCommand}" />
+                <!-- New button -->
             </StackPanel>
             <ListView ItemsSource="{Binding TeacherCourses}" SelectedItem="{Binding SelectedCourse}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="100" Header="Course name" DisplayMemberBinding="{Binding CourseName}"/>
+                        <GridViewColumn Width="200" Header="Course name" DisplayMemberBinding="{Binding CourseName}"/>
                         <GridViewColumn Width="100" Header="Level" DisplayMemberBinding="{Binding CourseLevel}"/>
                         <GridViewColumn Width="100" Header="Duration (weeks)" DisplayMemberBinding="{Binding WeeksDuration}"/>
                         <GridViewColumn Width="100" Header="Starts at" DisplayMemberBinding="{Binding StartsAt}"/>

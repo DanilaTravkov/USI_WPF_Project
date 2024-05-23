@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="WPFTutorial.View.MyApplications"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFTutorial.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel>
+            <TextBlock Margin="5" Text="My Applications"/>
+            <ListView ItemsSource="{Binding MyApplications}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="150" Header="Course Name" DisplayMemberBinding="{Binding Course.CourseName}"/>
+                        <GridViewColumn Width="100" Header="Duration (weeks)" DisplayMemberBinding="{Binding Course.WeeksDuration}"/>
+                        <GridViewColumn Width="150" Header="Teacher" DisplayMemberBinding="{Binding Course.Teacher.Name}"/>
+                        <GridViewColumn Width="150" Header="Application Date" DisplayMemberBinding="{Binding ApplicationDate}"/>
+                        <GridViewColumn Width="100" Header="Status" DisplayMemberBinding="{Binding IsAccepted}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</UserControl>

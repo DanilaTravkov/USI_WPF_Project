@@ -10,6 +10,12 @@
     <Compile Update="View\CreateCourse.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\DenyStudentModal.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\MyApplications.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Register.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -31,9 +37,18 @@
     <Compile Update="View\UpdateCourse.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\ViewCourseApplications.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="View\CreateCourse.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\DenyStudentModal.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\MyApplications.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Register.xaml">
@@ -58,6 +73,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UpdateCourse.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ViewCourseApplications.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
