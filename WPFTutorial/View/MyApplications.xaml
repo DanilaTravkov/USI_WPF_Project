@@ -17,6 +17,7 @@
                         <GridViewColumn Width="150" Header="Teacher" DisplayMemberBinding="{Binding Course.Teacher.Name}"/>
                         <GridViewColumn Width="150" Header="Application Date" DisplayMemberBinding="{Binding ApplicationDate}"/>
                         <GridViewColumn Width="100" Header="Status" DisplayMemberBinding="{Binding IsAccepted}"/>
+                        <GridViewColumn Width="250" Header="Denial reason" DisplayMemberBinding="{Binding DenialMessage}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
