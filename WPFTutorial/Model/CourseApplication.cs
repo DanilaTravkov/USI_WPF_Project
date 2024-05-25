@@ -14,7 +14,7 @@ namespace WPFTutorial.Model
         public int CourseId { get; set; }
         public Course Course { get; set; }
 
-        public bool? IsAccepted { get; set; }
+        public bool IsAccepted { get; set; }
         public string? DenialMessage { get; set; }
         public DateTime ApplicationDate { get; set; }
     }
