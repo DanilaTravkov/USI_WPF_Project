@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="WPFTutorial.View.StudentSeeCoursesData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFTutorial.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="400"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Height="30" Text="Selected course" Margin="5" VerticalAlignment="Center"/>
+            <Button Content="Cancel course" Width="100" HorizontalAlignment="Left" Margin="5"/>
+        </StackPanel>
+        <ListView Grid.Row="1" ItemsSource="{Binding StudentCourse}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="100" Header="Course name" DisplayMemberBinding="{Binding CourseName}"/>
+                    <GridViewColumn Width="100" Header="Level" DisplayMemberBinding="{Binding CourseLevel}"/>
+                    <GridViewColumn Width="100" Header="Duration (weeks)" DisplayMemberBinding="{Binding WeeksDuration}"/>
+                    <GridViewColumn Width="100" Header="Starts at" DisplayMemberBinding="{Binding StartsAt}"/>
+                    <GridViewColumn Width="100" Header="Is online" DisplayMemberBinding="{Binding IsOnline}"/>
+                    <GridViewColumn Width="100" Header="Teacher" DisplayMemberBinding="{Binding Teacher.Name}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

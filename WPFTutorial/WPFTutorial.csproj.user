@@ -28,6 +28,9 @@
     <Compile Update="View\StudentCoursesExams.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\StudentSeeCoursesData.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\TeacherCoursesExams.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -64,6 +67,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\StudentCoursesExams.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\StudentSeeCoursesData.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\TeacherCoursesExams.xaml">

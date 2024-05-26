@@ -26,16 +26,25 @@ namespace WPFTutorial.ViewModel
                 OnPropertyChanged();
             }
         }
-
+       
         public ObservableCollection<Course> AvailableCourses { get; set; }
+        public ICommand SortCoursesByCreationDateCommand { get; set; }
+        public ICommand SortCoursesByCourseNameCommand { get; set; }
+        public ICommand SortCoursesByLevelCommand { get; set; }
         public ICommand EnrollCourseCommand { get; set; }
         public ICommand SeeMyApplicationsCommand { get; set; }
+        public ICommand SeeMyCourseCommand {  get; set; }
 
         public StudentCoursesExamsViewModel()
         {
             AvailableCourses = new ObservableCollection<Course>();
+            SortCoursesByCreationDateCommand = new RelayCommand(SortByCreationDate, CanSortByCreationDate);
+            SortCoursesByCourseNameCommand = new RelayCommand(SortByCourseName, CanSortByCourseName);
+            SortCoursesByLevelCommand = new RelayCommand(SortByLevel, CanSortByLevel);
+
             EnrollCourseCommand = new RelayCommand(EnrollCourse, CanEnrollCourse);
             SeeMyApplicationsCommand = new RelayCommand(SeeMyApplications, CanSeeMyApplications);
+            SeeMyCourseCommand = new RelayCommand(SeeMyCourse, CanSeeMyCourse);
 
             using (var dbContext = new DatabaseContext())
             {
@@ -60,6 +69,48 @@ namespace WPFTutorial.ViewModel
             }
         }
 
+        private bool CanSortByCreationDate(object obj)
+        {
+            return true; // Add your condition if necessary
+        }
+
+        private void SortByCreationDate(object obj)
+        {
+            // Add sorting logic by creation date here
+        }
+
+        private bool CanSortByCourseName(object obj)
+        {
+            return true; // Add your condition if necessary
+        }
+
+        private void SortByCourseName(object obj)
+        {
+            // Add sorting logic by course name here
+        }
+
+        private bool CanSortByLevel(object obj)
+        {
+            return true; // Add your condition if necessary
+        }
+
+        private void SortByLevel(object obj)
+        {
+            // Add sorting logic by level here
+        }
+
+
+        private bool CanSeeMyCourse(object obj)
+        {
+            return true;
+        }
+
+        private void SeeMyCourse(object obj)
+        {
+            StudentSeeCoursesData courseData = new WPFTutorial.View.StudentSeeCoursesData();
+            Application.Current.MainWindow.Content = courseData;
+        }
+
         private bool CanSeeMyApplications(object obj)
         {
             return true;
@@ -81,16 +132,27 @@ namespace WPFTutorial.ViewModel
         {
             if (UserSession.Instance.LoggedInUser is Student student)
             {
-                if (SelectedCourse != null)
+                using (var dbContext = new DatabaseContext())
                 {
-                    using (var dbContext = new DatabaseContext())
+                    // Check if the student is already enrolled in the selected course
+                    if (student.CourseId == SelectedCourse.Id)
                     {
-                        if (student.CourseId != null)
-                        {
-                            MessageBox.Show("You are already enrolled in a course.");
-                            return;
-                        }
+                        MessageBox.Show("You are already enrolled in this course.");
+                        return;
+                    }
 
+                    // Check if the student already has an application for the selected course
+                    var existingApplication = dbContext.CourseApplications
+                        .FirstOrDefault(ca => ca.StudentId == student.Id && ca.CourseId == SelectedCourse.Id);
+
+                    if (existingApplication != null)
+                    {
+                        MessageBox.Show("You have already applied for this course.");
+                        return;
+                    }
+
+                    if (SelectedCourse != null)
+                    {
                         var courseApplication = new CourseApplication
                         {
                             StudentId = student.Id,
@@ -103,10 +165,10 @@ namespace WPFTutorial.ViewModel
 
                         MessageBox.Show("You have applied for the course.");
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Please select a course");
+                    else
+                    {
+                        MessageBox.Show("Please select a course");
+                    }
                 }
             }
         }

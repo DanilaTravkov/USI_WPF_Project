@@ -51,30 +51,15 @@ namespace WPFTutorial.ViewModel
             using (var dbContext = new DatabaseContext())
             {
                 var courseApplications = dbContext.CourseApplications
-                    .Where(ca => ca.CourseId == SelectedCourse.Id && ca.IsAccepted)
+                    .Where(ca => ca.CourseId == SelectedCourse.Id)
                     .Include(ca => ca.Student)
                     .ToList();
                 foreach (var application in courseApplications)
                 {
-                    // Check if the student is not already enrolled in a course
-                    if (application.Student.CourseId == null)
-                    {
-                        CourseApplications.Add(application);
-                    }
-                    else
-                    {
-                        // If the student is already enrolled, remove the application
-                        var applicationToRemove = dbContext.CourseApplications.FirstOrDefault(ca => ca.Id == application.Id);
-                        if (applicationToRemove != null)
-                        {
-                            dbContext.CourseApplications.Remove(applicationToRemove);
-                            dbContext.SaveChanges();
-                        }
-                    }
+                    CourseApplications.Add(application);
                 }
             }
         }
-
 
 
         private void AcceptStudent(object parameter)
@@ -84,26 +69,21 @@ namespace WPFTutorial.ViewModel
                 using (var dbContext = new DatabaseContext())
                 {
                     var student = dbContext.Students.FirstOrDefault(s => s.Id == SelectedApplication.StudentId);
-                    var application = dbContext.CourseApplications
-                            .FirstOrDefault(ca => ca.Id == SelectedApplication.Id);
+                    var application = dbContext.CourseApplications.FirstOrDefault(ca => ca.Id == SelectedApplication.Id);
 
                     // Check if the student exists and is not already enrolled in a course
-                    if (student.CourseId == null)
+                    if (student != null && student.CourseId == null)
                     {
                         // Assign the course to the student
                         student.CourseId = SelectedApplication.CourseId;
                         application.IsAccepted = true;
 
                         // Remove the accepted application
-                        var applicationToRemove = dbContext.CourseApplications.FirstOrDefault(ca => ca.Id == SelectedApplication.Id);
-                        if (applicationToRemove != null)
-                        {
-                            dbContext.CourseApplications.Remove(applicationToRemove);
-                        }
+                        dbContext.CourseApplications.Remove(application);
 
-                        // Remove other applications for the student
+                        // Remove other pending applications for the student
                         var otherApplications = dbContext.CourseApplications
-                            .Where(ca => ca.StudentId == student.Id && ca.Id != SelectedApplication.Id)
+                            .Where(ca => ca.StudentId == student.Id && ca.Id != SelectedApplication.Id && !ca.IsAccepted)
                             .ToList();
                         dbContext.CourseApplications.RemoveRange(otherApplications);
 
@@ -114,9 +94,13 @@ namespace WPFTutorial.ViewModel
                         // Refresh the list
                         LoadCourseApplications();
                     }
-                    else
+                    else if (student != null && student.CourseId != null)
                     {
                         MessageBox.Show("This student already has a course");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Student not found or already has a course");
                     }
                 }
             }
@@ -125,7 +109,6 @@ namespace WPFTutorial.ViewModel
                 MessageBox.Show("No application selected.");
             }
         }
-
 
 
         private void DenyStudent(object parameter)
