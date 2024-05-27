@@ -31,14 +31,7 @@
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Language}" Margin="5"/>
 
                 <TextBlock Grid.Row="2" Text="Language Level:" VerticalAlignment="Center"/>
-                <ComboBox x:Name="languageLevel" Text="Level" Margin="0,34,0,-24" Grid.ColumnSpan="3">
-                    <ComboBoxItem Content="A1"/>
-                    <ComboBoxItem Content="A2"/>
-                    <ComboBoxItem Content="B1"/>
-                    <ComboBoxItem Content="B2"/>
-                    <ComboBoxItem Content="C1"/>
-                    <ComboBoxItem Content="C2"/>
-                </ComboBox>
+                <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding LanguageLevels}" SelectedItem="{Binding LanguageLevel}" Margin="5,8,5,10"/>
 
                 <TextBlock Grid.Row="3" Text="Max Number of Students:" VerticalAlignment="Center"/>
                 <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding MaxNumberOfStudents}" Margin="5"/>

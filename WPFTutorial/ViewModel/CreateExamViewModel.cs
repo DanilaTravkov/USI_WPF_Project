@@ -20,6 +20,8 @@ namespace WPFTutorial.ViewModel
         private DateTime examDate;
         private bool isOnline;
 
+        public List<string> LanguageLevels { get; } = new List<string> { "A1", "A2", "B1", "B2", "C1", "C2" };
+
         public string ExamName
         {
             get => examName;
@@ -96,15 +98,32 @@ namespace WPFTutorial.ViewModel
 
         private void CreateExam(object parameter)
         {
-
-
             if (UserSession.Instance.IsTeacher())
             {
                 var loggedInTeacher = UserSession.Instance.LoggedInUser as Teacher;
 
                 if (loggedInTeacher != null)
                 {
+
+                    if (string.IsNullOrEmpty(ExamName) || string.IsNullOrEmpty(Language))
+                    {
+                        MessageBox.Show("Some field(s) are empty!");
+                        return;
+                    }
                     MessageBox.Show($"Creating exam for teacher with ID: {loggedInTeacher.Id}");
+
+                    string selectedLanguageLevel = LanguageLevel;
+
+                    if (string.IsNullOrEmpty(selectedLanguageLevel))
+                    {
+                        throw new ArgumentException("LanguageLevel cannot be null or empty.");
+                    }
+
+                    ELevel level;
+                    if (!Enum.TryParse(selectedLanguageLevel, out level))
+                    {
+                        throw new ArgumentException("Invalid language level.");
+                    }
 
                     using (var dbContext = new DatabaseContext())
                     {
@@ -115,7 +134,7 @@ namespace WPFTutorial.ViewModel
                         {
                             ExamName = ExamName,
                             Language = Language,
-                            LanguageLevel = Enum.Parse<ELevel>(LanguageLevel),
+                            LanguageLevel = Enum.Parse<ELevel>(selectedLanguageLevel),
                             MaxNumberOfStudents = MaxNumberOfStudents,
                             ExamDate = ExamDate,
                             // TeacherId = loggedInTeacher.Id, // Uncomment and implement if needed
