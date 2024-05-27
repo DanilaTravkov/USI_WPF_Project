@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WPFTutorial.DB;
 
@@ -10,9 +11,11 @@ using WPFTutorial.DB;
 namespace WPFTutorial.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240527125526_Added table Director")]
+    partial class AddedtableDirector
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.5");
@@ -41,9 +44,6 @@ namespace WPFTutorial.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("INTEGER");
 
-                    b.Property<float>("SumTeacherGrade")
-                        .HasColumnType("REAL");
-
                     b.Property<string>("Surname")
                         .HasColumnType("TEXT");
 
@@ -63,9 +63,6 @@ namespace WPFTutorial.Migrations
 
                     b.Property<string>("CourseName")
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsFinished")
-                        .HasColumnType("INTEGER");
 
                     b.Property<bool?>("IsOnline")
                         .HasColumnType("INTEGER");

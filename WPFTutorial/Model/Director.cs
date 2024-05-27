@@ -17,6 +17,7 @@ namespace WPFTutorial.Model
             Password = password;
             Gender = gender;
             DateOfBirth = dateOfBirth;
+            Role = role;
         }
 
         [Key]
@@ -27,5 +28,6 @@ namespace WPFTutorial.Model
         public string? Password { get; set; }
         public string? Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
+        public Role Role { get; set; }
     }
 }

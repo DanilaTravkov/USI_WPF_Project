@@ -9,7 +9,7 @@
     <Grid>
         <StackPanel>
             <TextBlock Margin="5" Text="You are logged in as STUDENT"/>
-            <TextBlock Margin="5" Text="Available courses:"/>
+            <TextBlock Margin="5" x:Name="TextBlock_AreCoursesAvailable" Text="{Binding CourseAvailability}"/>
             <StackPanel Orientation="Horizontal">
                 <Button Width="150" Content="Enroll in Course" Command="{Binding EnrollCourseCommand}" />
                 <Button Width="150" Content="Sort by Creation Date" Command="{Binding SortCoursesByCreationDateCommand}" />

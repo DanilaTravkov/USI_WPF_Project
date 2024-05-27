@@ -27,15 +27,13 @@ namespace WPFTutorial.ViewModel
             }
         }
 
-        public ICommand? SeeCoursesCommand { get; set; }
-        public ICommand? SeeExamsCommand { get; set; }
-
         public ICommand SortCoursesByCreationDateCommand { get; set; }
         public ICommand SortCoursesByLanguageCommand { get; set; }
         public ICommand SortCoursesByLevelCommand { get; set; }
         public ICommand ShowCreateCourseCommand { get; set; }
         public ICommand ShowUpdateSelectedCourseCommand { get; set; }
         public ICommand ViewCourseApplicationsCommand { get; set; }
+        public ICommand ShowCreateExamCommand { get; set; }
 
         public ObservableCollection<Course> TeacherCourses { get; set; }
 
@@ -48,9 +46,23 @@ namespace WPFTutorial.ViewModel
             SortCoursesByLevelCommand = new RelayCommand(SortCoursesByLevel, CanSortCoursesByLevel);
             ShowCreateCourseCommand = new RelayCommand(ShowCreateCourse, CanCreateCourse);
             ShowUpdateSelectedCourseCommand = new RelayCommand(UpdateSelectedCourse, CanUpdateSelectedCourse);
-            ViewCourseApplicationsCommand = new RelayCommand(ViewCourseApplications, CanViewCourseApplications); 
+            ViewCourseApplicationsCommand = new RelayCommand(ViewCourseApplications, CanViewCourseApplications);
+
+            ShowCreateExamCommand = new RelayCommand(ShowCreateExam, CanCreateExam);
 
             LoadTeacherCourses();
+        }
+
+        private bool CanCreateExam(object obj)
+        {
+            return true;
+        }
+
+        private void ShowCreateExam(object obj)
+        {
+            CreateExam createExam = new WPFTutorial.View.CreateExam();
+            Window mainWindow = Application.Current.MainWindow;
+            mainWindow.Content = createExam;
         }
 
         private void LoadTeacherCourses()

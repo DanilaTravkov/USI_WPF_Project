@@ -5,9 +5,11 @@ namespace WPFTutorial.DB
 {
     public class DatabaseContext : DbContext
     {
+        public DbSet<Director> Directors { get; set; } // the dbset is named DirectorS although there can only be one director account
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Exam> Exams { get; set; }
         public DbSet<CourseApplication> CourseApplications { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -10,6 +10,9 @@
     <Compile Update="View\CreateCourse.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\CreateExam.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\DenyStudentModal.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -46,6 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="View\CreateCourse.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CreateExam.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\DenyStudentModal.xaml">

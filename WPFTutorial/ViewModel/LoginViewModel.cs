@@ -28,11 +28,13 @@ namespace WPFTutorial.ViewModel
                     .FirstOrDefault(t => t.Email.ToLower() == Email.ToLower() && t.Password == Password);
                 var student = dbContext.Students
                     .FirstOrDefault(s => s.Email.ToLower() == Email.ToLower() && s.Password == Password);
+                var director = dbContext.Directors
+                    .FirstOrDefault(d => d.Email.ToLower() == Email.ToLower() && d.Password == Password);
 
                 if (teacher != null)
                 {
                     UserSession.Instance.SetLoggedInUser(teacher);
-                    MessageBox.Show("Login successful!");
+                    MessageBox.Show("Succsessfully logged in as TEACHER");
 
                     // Create the TeacherCoursesExams view if the logged-in user is a teacher
                     var teacherCoursesExamsView = new WPFTutorial.View.TeacherCoursesExams();
@@ -42,11 +44,16 @@ namespace WPFTutorial.ViewModel
                 else if (student != null)
                 {
                     UserSession.Instance.SetLoggedInUser(student);
-                    MessageBox.Show("Login successful!");
+                    MessageBox.Show("Succsessfully logged in as STUDENT");
 
                     var studentCoursesExamsView = new WPFTutorial.View.StudentCoursesExams();
                     Window mainWindow = Application.Current.MainWindow;
                     mainWindow.Content = studentCoursesExamsView;
+                }
+                else if (director != null)
+                {
+                    UserSession.Instance.SetLoggedInUser(director);
+                    MessageBox.Show("Succsessfully logged in as DIRECTOR");
                 }
                 else
                 {

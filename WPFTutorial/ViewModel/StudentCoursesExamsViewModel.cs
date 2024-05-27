@@ -16,6 +16,18 @@ namespace WPFTutorial.ViewModel
 {
     public class StudentCoursesExamsViewModel : INotifyPropertyChanged
     {
+
+        private string CourseAvailability = "Available courses for you: ";
+        public string _CourseAvailability 
+        {  
+            get => CourseAvailability;
+            set
+            {
+                CourseAvailability = value;
+                OnPropertyChanged();
+            }
+        }
+
         private Course selectedCourse;
         public Course SelectedCourse
         {
@@ -50,20 +62,28 @@ namespace WPFTutorial.ViewModel
             {
                 if (UserSession.Instance.LoggedInUser is Student student)
                 {
-                    var courses = dbContext.Courses
-                        .Include(c => c.Teacher)
-                        .Include(c => c.Students)
-                        .ToList();
-
-                    var filteredCourses = courses
-                        .Where(c => c.MaxStudents > c.Students.Count)
-                        .Where(c => c.StartsAt.HasValue && (c.StartsAt.Value - DateTime.Now).TotalDays > 7)
-                        .ToList();
-
-                    AvailableCourses.Clear();
-                    foreach (var course in filteredCourses)
+                    if (student.CourseId != null)
                     {
-                        AvailableCourses.Add(course);
+                        CourseAvailability = "You have already been accepted on a course, click 'See my course' to view data";
+                        AvailableCourses.Clear();
+                    }
+                    else
+                    {
+                        var courses = dbContext.Courses
+                            .Include(c => c.Teacher)
+                            .Include(c => c.Students)
+                            .ToList();
+
+                        var filteredCourses = courses // display available courses for a student
+                            .Where(c => c.MaxStudents > c.Students.Count)
+                            .Where(c => c.StartsAt.HasValue && (c.StartsAt.Value - DateTime.Now).TotalDays > 7)
+                            .ToList();
+
+                        AvailableCourses.Clear();
+                        foreach (var course in filteredCourses)
+                        {
+                            AvailableCourses.Add(course);
+                        }
                     }
                 }
             }
