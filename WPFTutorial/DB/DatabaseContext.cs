@@ -44,6 +44,13 @@ namespace WPFTutorial.DB
                 .WithMany(c => c.CourseApplications)
                 .HasForeignKey(ca => ca.CourseId);
 
+            // Configuring Student to Exam relationship
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.Exam)
+                .WithMany(e => e.Students)
+                .HasForeignKey(s => s.ExamId)
+                .OnDelete(DeleteBehavior.SetNull);
+
             base.OnModelCreating(modelBuilder);
         }
     }

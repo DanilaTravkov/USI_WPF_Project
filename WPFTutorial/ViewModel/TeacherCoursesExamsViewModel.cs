@@ -33,6 +33,8 @@ namespace WPFTutorial.ViewModel
         public ICommand ShowCreateCourseCommand { get; set; }
         public ICommand ShowUpdateSelectedCourseCommand { get; set; }
         public ICommand ViewCourseApplicationsCommand { get; set; }
+
+        public ICommand FinishCourseCommand {  get; set; }
         public ICommand ShowCreateExamCommand { get; set; }
 
         public ObservableCollection<Course> TeacherCourses { get; set; }
@@ -47,10 +49,50 @@ namespace WPFTutorial.ViewModel
             ShowCreateCourseCommand = new RelayCommand(ShowCreateCourse, CanCreateCourse);
             ShowUpdateSelectedCourseCommand = new RelayCommand(UpdateSelectedCourse, CanUpdateSelectedCourse);
             ViewCourseApplicationsCommand = new RelayCommand(ViewCourseApplications, CanViewCourseApplications);
+            FinishCourseCommand = new RelayCommand(FinishCourse, CanFinishCourse);
 
             ShowCreateExamCommand = new RelayCommand(ShowCreateExam, CanCreateExam);
 
             LoadTeacherCourses();
+        }
+
+        private bool CanFinishCourse(object obj)
+        {
+            return true;
+        }
+
+
+        private void FinishCourse(object obj)
+        {
+            if (SelectedCourse == null)
+            {
+                MessageBox.Show("Please select a course to finish.");
+                return;
+            }
+            using (var dbContext = new DatabaseContext())
+            {
+                if (UserSession.Instance.LoggedInUser is Teacher teacher)
+                {
+                    var course = dbContext.Courses
+                        .Include(c => c.Students)
+                        .Include(t => t.Teacher)
+                        .FirstOrDefault(c => c.TeacherId == teacher.Id);
+
+                    if (course != null)
+                    {
+                        if (course.Students.Count == course.MaxStudents)
+                        {
+                            course.IsFinished = true;
+                            dbContext.SaveChanges();
+                            MessageBox.Show("Course has been marked as finished.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Course is not filled with the maximum number of students.");
+                        }
+                    }
+                }
+            }
         }
 
         private bool CanCreateExam(object obj)
