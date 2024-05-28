@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+using WPFTutorial.Commands;
 using WPFTutorial.DB;
 using WPFTutorial.Model;
 using WPFTutorial.Session;
@@ -8,10 +10,14 @@ namespace WPFTutorial.ViewModel
 {
     public class StudentSeeCoursesDataViewModel
     {
-        public ObservableCollection<Course>  StudentCourse { get; }
+        public ObservableCollection<Course> StudentCourse { get; }
+
+        public ICommand ShowGradeTeacherCommand;
 
         public StudentSeeCoursesDataViewModel()
         {
+            ShowGradeTeacherCommand = new RelayCommand(ShowGradeTeacher, CanShowGradeTeacher);
+
             var currentStudent = UserSession.Instance.LoggedInUser as Student;
             StudentCourse = new ObservableCollection<Course>();
             using (var dbContext = new DatabaseContext())
@@ -24,6 +30,16 @@ namespace WPFTutorial.ViewModel
                     StudentCourse.Add(course);
                 }
             }
+        }
+
+        private bool CanShowGradeTeacher(object obj)
+        {
+            return true;
+        }
+
+        private void ShowGradeTeacher(object obj)
+        {
+            
         }
     }
 }

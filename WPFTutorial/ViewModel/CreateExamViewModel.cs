@@ -92,7 +92,6 @@ namespace WPFTutorial.ViewModel
 
         private bool CanCreateExam(object parameter)
         {
-            // You can add your validation logic here
             return true;
         }
 
@@ -104,7 +103,6 @@ namespace WPFTutorial.ViewModel
 
                 if (loggedInTeacher != null)
                 {
-
                     if (string.IsNullOrEmpty(ExamName) || string.IsNullOrEmpty(Language))
                     {
                         MessageBox.Show("Some field(s) are empty!");
@@ -127,6 +125,14 @@ namespace WPFTutorial.ViewModel
 
                     using (var dbContext = new DatabaseContext())
                     {
+                        // Check for existing exam with the same date
+                        var existingExam = dbContext.Exams.FirstOrDefault(exam => exam.ExamDate == ExamDate);
+                        if (existingExam != null)
+                        {
+                            MessageBox.Show("An exam with the same date already exists. Please choose a different date.");
+                            return;
+                        }
+
                         // Attach the existing teacher to the context to avoid insertion
                         dbContext.Teachers.Attach(loggedInTeacher);
 
@@ -134,7 +140,7 @@ namespace WPFTutorial.ViewModel
                         {
                             ExamName = ExamName,
                             Language = Language,
-                            LanguageLevel = Enum.Parse<ELevel>(selectedLanguageLevel),
+                            LanguageLevel = level,
                             MaxNumberOfStudents = MaxNumberOfStudents,
                             ExamDate = ExamDate,
                             // TeacherId = loggedInTeacher.Id, // Uncomment and implement if needed
@@ -156,6 +162,7 @@ namespace WPFTutorial.ViewModel
                 MessageBox.Show("You must be logged in as a teacher to create an exam.");
             }
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -64,6 +64,7 @@ namespace WPFTutorial.ViewModel
                 {
                     if (student.CourseId != null)
                     {
+                        MessageBox.Show("Congratulations, you have been accepted on a course!");
                         CourseAvailability = "You have already been accepted on a course, click 'See my course' to view data";
                         AvailableCourses.Clear();
                     }

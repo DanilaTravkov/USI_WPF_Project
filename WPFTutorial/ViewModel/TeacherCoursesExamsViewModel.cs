@@ -76,7 +76,7 @@ namespace WPFTutorial.ViewModel
                     var course = dbContext.Courses
                         .Include(c => c.Students)
                         .Include(t => t.Teacher)
-                        .FirstOrDefault(c => c.TeacherId == teacher.Id);
+                        .FirstOrDefault(c => c.Id == SelectedCourse.Id && c.TeacherId == teacher.Id);
 
                     if (course != null)
                     {
