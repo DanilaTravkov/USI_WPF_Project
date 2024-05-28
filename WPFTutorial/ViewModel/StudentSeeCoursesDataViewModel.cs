@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using WPFTutorial.Commands;
 using WPFTutorial.DB;
@@ -39,7 +40,8 @@ namespace WPFTutorial.ViewModel
 
         private void ShowGradeTeacher(object obj)
         {
-            
+            var studentGradeTeacher = new WPFTutorial.View.StudentGradeTeacher();
+            studentGradeTeacher.Show();
         }
     }
 }
