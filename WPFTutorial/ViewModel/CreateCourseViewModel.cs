@@ -24,6 +24,17 @@ namespace WPFTutorial.ViewModel
         private bool? isOnline;
         private int? maxStudents;
         private string courseName;
+        private string language;
+
+        public string Language
+        {
+            get => language;
+            set
+            {
+                language = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ELevel CourseLevel
         {
@@ -149,6 +160,7 @@ namespace WPFTutorial.ViewModel
                             IsOnline = IsOnline,
                             MaxStudents = MaxStudents,
                             CourseName = CourseName,
+                            Language = Language,
                             WeekDays = SelectedDays.ToList()
                         };
 

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WPFTutorial.Commands;
@@ -98,7 +98,6 @@ namespace WPFTutorial.ViewModel
             return true;
         }
 
-
         private void CreateExam(object parameter)
         {
             if (UserSession.Instance.IsDirector())
@@ -158,15 +157,14 @@ namespace WPFTutorial.ViewModel
                 }
                 else
                 {
-                    MessageBox.Show("Logged in user is not a teacher.");
+                    MessageBox.Show("Logged in user is not a director.");
                 }
             }
             else
             {
-                MessageBox.Show("You must be logged in as a teacher to create an exam.");
+                MessageBox.Show("You must be logged in as a director to create an exam.");
             }
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

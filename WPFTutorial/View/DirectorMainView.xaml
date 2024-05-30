@@ -12,7 +12,8 @@
         <StackPanel>
             <TextBlock Margin="5" Text="You are logged in as DIRECTOR"/>
             <StackPanel Orientation="Horizontal">
-                <Button Width="150" Content="Create exam" Command="{Binding ShowCreateExamCommand}" />
+                <Button Width="150" Content="Create Exam" Command="{Binding ShowCreateExamCommand}" />
+                <Button Width="150" Content="Assign teachers to exams" Command="{Binding ShowTeachersAssignedToExamsCommand}" />
             </StackPanel>
         </StackPanel>
     </Grid>

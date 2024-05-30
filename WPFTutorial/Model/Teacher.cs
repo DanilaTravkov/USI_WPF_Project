@@ -25,6 +25,8 @@ public class Teacher
     public DateTime? DateOfBirth { get; set; }
     public Role Role { get; set; }
     public float SumTeacherGrade {  get; set; } // Sum 
+    public string? StudiedLanguage { get; set; }
+    public string? CanHoldExam { get; set; }
 
     // relational fields
     public ICollection<Course> Courses { get; set; }  // Add this collection

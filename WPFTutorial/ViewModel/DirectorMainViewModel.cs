@@ -14,16 +14,30 @@ namespace WPFTutorial.ViewModel
     {
         public ICommand ShowCreateExamCommand { get; set; }
 
+        public ICommand ShowTeachersAssignedToExamsCommand {  get; set; }
+
         public DirectorMainViewModel()
         {
             ShowCreateExamCommand = new RelayCommand(ShowCreateExam, CanShowCreateExam);
+            ShowTeachersAssignedToExamsCommand = new RelayCommand(ShowTeachersAssignedToExams, CanShowTeachersAssignedToExams);
+        }
+
+        private bool CanShowTeachersAssignedToExams(object obj)
+        {
+            return true;
+        }
+
+        private void ShowTeachersAssignedToExams(object obj)
+        {
+            DirectorSystemAssignedTeacherToExam directorSystemAssignedTeacherToExam = new View.DirectorSystemAssignedTeacherToExam();
+            Application.Current.MainWindow.Content = directorSystemAssignedTeacherToExam;
         }
 
         private bool CanShowCreateExam(object obj)
         {
             return true;
         }
-
+        
         private void ShowCreateExam(object obj)
         {
             MessageBox.Show("Showing create exam for director");
