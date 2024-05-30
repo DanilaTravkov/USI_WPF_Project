@@ -36,6 +36,7 @@ namespace WPFTutorial.Model
         public TimeOnly ClassDuration { get; } = new TimeOnly(1, 30); // 1 hour and 30 minutes (90 minutes)
         public string? CourseName {  get; set; }
         public bool IsFinished { get; set; } = false;
+        public int? StudentsCount { get; set; }
 
         // relational fields
 

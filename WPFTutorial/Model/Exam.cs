@@ -15,6 +15,11 @@ namespace WPFTutorial.Model
         public DateTime ExamDate { get; set; }
         public TimeOnly Duration { get; } = new TimeOnly(4, 0); // Changed to 4 hours
         public bool CanBeEdited => DateTime.Now <= ExamDate.AddDays(-14);
+
+        // reference fields
+
         public ICollection<Student> Students { get; set; }
+        public int CreatorId { get; set; }
+        public string CreatorType { get; set; } // Since both director and teachers can create exams
     }
 }

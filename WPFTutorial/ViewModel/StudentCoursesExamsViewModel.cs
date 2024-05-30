@@ -64,7 +64,6 @@ namespace WPFTutorial.ViewModel
                 {
                     if (student.CourseId != null)
                     {
-                        MessageBox.Show("Congratulations, you have been accepted on a course!");
                         CourseAvailability = "You have already been accepted on a course, click 'See my course' to view data";
                         AvailableCourses.Clear();
                     }
@@ -92,22 +91,22 @@ namespace WPFTutorial.ViewModel
 
         private bool CanSortByCreationDate(object obj)
         {
-            return true; // Add your condition if necessary
+            return true;
         }
 
         private void SortByCreationDate(object obj)
         {
-            // Add sorting logic by creation date here
+            // TODO: add sorting
         }
 
         private bool CanSortByCourseName(object obj)
         {
-            return true; // Add your condition if necessary
+            return true;
         }
 
         private void SortByCourseName(object obj)
         {
-            // Add sorting logic by course name here
+            // TODO: add sorting
         }
 
         private bool CanSortByLevel(object obj)
@@ -117,7 +116,7 @@ namespace WPFTutorial.ViewModel
 
         private void SortByLevel(object obj)
         {
-            // Add sorting logic by level here
+            // TODO: add sorting
         }
 
 

@@ -13,7 +13,7 @@ namespace WPFTutorial.ViewModel
     {
         public ObservableCollection<Course> StudentCourse { get; }
 
-        public ICommand ShowGradeTeacherCommand;
+        public ICommand ShowGradeTeacherCommand { get; set; }
 
         public StudentSeeCoursesDataViewModel()
         {

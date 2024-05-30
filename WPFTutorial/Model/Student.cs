@@ -26,6 +26,7 @@ namespace WPFTutorial.Model
         public string? Password { get; set; }
         public string? Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
+        public List<int> GradedTeacherIds { get; set; } = new List<int>(); // So that a student can't grade one teacher twice
 
         // This field is for determining how the user should be authorized
         public Role Role { get; set; }

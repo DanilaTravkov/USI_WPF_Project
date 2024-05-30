@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WPFTutorial.Commands;
@@ -11,7 +14,7 @@ using WPFTutorial.Session;
 
 namespace WPFTutorial.ViewModel
 {
-    public class CreateExamViewModel : INotifyPropertyChanged
+    public class DirectorCreateExamViewModel : INotifyPropertyChanged
     {
         private string examName;
         private string language;
@@ -84,7 +87,7 @@ namespace WPFTutorial.ViewModel
 
         public ICommand CreateExamCommand { get; set; }
 
-        public CreateExamViewModel()
+        public DirectorCreateExamViewModel()
         {
             CreateExamCommand = new RelayCommand(CreateExam, CanCreateExam);
             ExamDate = DateTime.Now;
@@ -95,20 +98,21 @@ namespace WPFTutorial.ViewModel
             return true;
         }
 
+
         private void CreateExam(object parameter)
         {
             if (UserSession.Instance.IsTeacher())
             {
-                var loggedInTeacher = UserSession.Instance.LoggedInUser as Teacher;
+                var loggedInDirector = UserSession.Instance.LoggedInUser as Director;
 
-                if (loggedInTeacher != null)
+                if (loggedInDirector != null)
                 {
                     if (string.IsNullOrEmpty(ExamName) || string.IsNullOrEmpty(Language))
                     {
                         MessageBox.Show("Some field(s) are empty!");
                         return;
                     }
-                    MessageBox.Show($"Creating exam for teacher with ID: {loggedInTeacher.Id}");
+                    MessageBox.Show($"Creating exam for teacher with ID: {loggedInDirector.Id}");
 
                     string selectedLanguageLevel = LanguageLevel;
 
@@ -133,8 +137,8 @@ namespace WPFTutorial.ViewModel
                             return;
                         }
 
-                        // Attach the existing teacher to the context to avoid insertion
-                        dbContext.Teachers.Attach(loggedInTeacher);
+                        // Attach the existing director to the context to avoid insertion
+                        dbContext.Directors.Attach(loggedInDirector);
 
                         Exam newExam = new Exam
                         {
@@ -143,7 +147,7 @@ namespace WPFTutorial.ViewModel
                             LanguageLevel = level,
                             MaxNumberOfStudents = MaxNumberOfStudents,
                             ExamDate = ExamDate,
-                            CreatorId = loggedInTeacher.Id,
+                            CreatorId = loggedInDirector.Id,
                             CreatorType = "Director"
                         };
 

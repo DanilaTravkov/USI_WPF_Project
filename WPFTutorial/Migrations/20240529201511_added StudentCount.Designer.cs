@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WPFTutorial.DB;
 
@@ -10,9 +11,11 @@ using WPFTutorial.DB;
 namespace WPFTutorial.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240529201511_added StudentCount")]
+    partial class addedStudentCount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.5");
@@ -76,7 +79,7 @@ namespace WPFTutorial.Migrations
                     b.Property<DateTime?>("StartsAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("StudentsCount")
+                    b.Property<int>("StudentsCount")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("TeacherId")
@@ -163,13 +166,6 @@ namespace WPFTutorial.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<int>("CreatorId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("CreatorType")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ExamDate")
                         .HasColumnType("TEXT");

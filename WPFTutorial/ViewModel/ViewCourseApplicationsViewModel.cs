@@ -78,6 +78,10 @@ namespace WPFTutorial.ViewModel
                         student.CourseId = SelectedApplication.CourseId;
                         application.IsAccepted = true;
 
+                        // Increase counter of students on course;
+                        var course = dbContext.Courses.FirstOrDefault(c => student.CourseId == c.Id);
+                        course.StudentsCount++;
+
                         // Remove the accepted application
                         dbContext.CourseApplications.Remove(application);
 
