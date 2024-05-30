@@ -101,7 +101,7 @@ namespace WPFTutorial.ViewModel
 
         private void CreateExam(object parameter)
         {
-            if (UserSession.Instance.IsTeacher())
+            if (UserSession.Instance.IsDirector())
             {
                 var loggedInDirector = UserSession.Instance.LoggedInUser as Director;
 
@@ -112,7 +112,7 @@ namespace WPFTutorial.ViewModel
                         MessageBox.Show("Some field(s) are empty!");
                         return;
                     }
-                    MessageBox.Show($"Creating exam for teacher with ID: {loggedInDirector.Id}");
+                    MessageBox.Show($"Creating exam for director");
 
                     string selectedLanguageLevel = LanguageLevel;
 
