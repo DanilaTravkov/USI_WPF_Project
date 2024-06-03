@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WPFTutorial.DB;
 
@@ -10,9 +11,11 @@ using WPFTutorial.DB;
 namespace WPFTutorial.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240527145345_added ExamId")]
+    partial class addedExamId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.5");
@@ -22,9 +25,6 @@ namespace WPFTutorial.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("CanHoldExam")
-                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("TEXT");
@@ -43,9 +43,6 @@ namespace WPFTutorial.Migrations
 
                     b.Property<int>("Role")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("StudiedLanguage")
-                        .HasColumnType("TEXT");
 
                     b.Property<float>("SumTeacherGrade")
                         .HasColumnType("REAL");
@@ -76,18 +73,11 @@ namespace WPFTutorial.Migrations
                     b.Property<bool?>("IsOnline")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Language")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<int?>("MaxStudents")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("StartsAt")
                         .HasColumnType("TEXT");
-
-                    b.Property<int?>("StudentsCount")
-                        .HasColumnType("INTEGER");
 
                     b.Property<int>("TeacherId")
                         .HasColumnType("INTEGER");
@@ -174,13 +164,6 @@ namespace WPFTutorial.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CreatorId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("CreatorType")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("ExamDate")
                         .HasColumnType("TEXT");
 
@@ -222,10 +205,6 @@ namespace WPFTutorial.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Gender")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("GradedTeacherIds")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")

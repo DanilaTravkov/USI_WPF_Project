@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WPFTutorial.Model
 {
     public class Student
     {
-
         public Student(string name, string surname, string email, string password, string gender, DateTime? dateOfBirth, Role role)
-
         {
             Name = name;
             Surname = surname;
@@ -21,7 +16,6 @@ namespace WPFTutorial.Model
             DateOfBirth = dateOfBirth;
             Role = role;
             CourseApplications = new List<CourseApplication>();
-
         }
 
         [Key] // decorator to make Id a unique field
@@ -32,16 +26,18 @@ namespace WPFTutorial.Model
         public string? Password { get; set; }
         public string? Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
+        public List<int> GradedTeacherIds { get; set; } = new List<int>(); // So that a student can't grade one teacher twice
 
         // This field is for determining how the user should be authorized
         public Role Role { get; set; }
         public int? CourseId { get; set; }
 
         // relational fields
-        public Course Course { get; set; } // TODO: A student can have only one course. Updated by teacher only if that Course was in HasStudentApplied with value true
-                                           // public IDictionary<string, Model.ELevel> LanguageLevel { get; set; } = new Dictionary<string, Model.ELevel>();
+        public Course Course { get; set; }
         public ICollection<CourseApplication> CourseApplications { get; set; }
 
-
+        // Exam relationship
+        public int? ExamId { get; set; }
+        public Exam Exam { get; set; }
     }
 }

@@ -25,5 +25,10 @@ namespace WPFTutorial.Session
         {
             return LoggedInUser is Student;
         }
+
+        public bool IsDirector()
+        {
+            return LoggedInUser is Director;
+        }
     }
 }

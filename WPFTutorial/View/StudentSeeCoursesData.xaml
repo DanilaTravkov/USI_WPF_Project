@@ -9,12 +9,13 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="400"/>
+            <RowDefinition Height="410"/>
         </Grid.RowDefinitions>
         
         <StackPanel Orientation="Horizontal">
             <TextBlock Height="30" Text="Selected course" Margin="5" VerticalAlignment="Center"/>
             <Button Content="Cancel course" Width="100" HorizontalAlignment="Left" Margin="5"/>
+            <Button Command="{Binding ShowGradeTeacherCommand}" Content="Grade teacher" Width="100" HorizontalAlignment="Left" Margin="5"/>
         </StackPanel>
         <ListView Grid.Row="1" ItemsSource="{Binding StudentCourse}">
             <ListView.View>
@@ -25,6 +26,7 @@
                     <GridViewColumn Width="100" Header="Starts at" DisplayMemberBinding="{Binding StartsAt}"/>
                     <GridViewColumn Width="100" Header="Is online" DisplayMemberBinding="{Binding IsOnline}"/>
                     <GridViewColumn Width="100" Header="Teacher" DisplayMemberBinding="{Binding Teacher.Name}"/>
+                    <GridViewColumn Width="100" Header="Is finished" DisplayMemberBinding="{Binding IsFinished}"/>
                 </GridView>
             </ListView.View>
         </ListView>

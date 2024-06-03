@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:WPFTutorial.View"
              xmlns:behaviors="clr-namespace:WPFTutorial.Behaviors"
              mc:Ignorable="d" 
-             d:DesignHeight="650" d:DesignWidth="400">
+             d:DesignHeight="725" d:DesignWidth="400">
     <Grid>
         <!-- Course Name -->
         <Label Content="Course name" Margin="25, 25, 0, 0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
@@ -52,7 +52,10 @@
         <Label Content="Max students" Margin="25, 525, 0, 0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <TextBox Text="{Binding MaxStudents, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="200" Margin="25,550,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="2" BorderBrush="DarkSlateBlue"/>
 
+        <Label Content="Studied language" Margin="25, 600, 0, 0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBox Text="{Binding Language, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="200" Margin="25,625,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="2" BorderBrush="DarkSlateBlue"/>
+
         <!-- Submit Button -->
         <Button Command="{Binding CreateCourseCommand}" Height="30" Width="70" Content="Submit" VerticalAlignment="Bottom" Padding="5" HorizontalAlignment="Right" Margin="25" Background="DarkSlateBlue" Foreground="White"/>
     </Grid>
-</UserControl>
+</UserControl> 

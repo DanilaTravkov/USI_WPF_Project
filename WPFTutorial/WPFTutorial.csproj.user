@@ -16,6 +16,15 @@
     <Compile Update="View\DenyStudentModal.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\DirectorCreateExam.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\DirectorMainView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\DirectorSystemAssignedTeacherToExam.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\MyApplications.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -29,6 +38,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\StudentCoursesExams.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\StudentGradeTeacher.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\StudentSeeCoursesData.xaml.cs">
@@ -57,6 +69,15 @@
     <Page Update="View\DenyStudentModal.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\DirectorCreateExam.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\DirectorMainView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\DirectorSystemAssignedTeacherToExam.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\MyApplications.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -73,6 +94,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\StudentCoursesExams.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\StudentGradeTeacher.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\StudentSeeCoursesData.xaml">

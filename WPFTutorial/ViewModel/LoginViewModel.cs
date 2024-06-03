@@ -54,6 +54,10 @@ namespace WPFTutorial.ViewModel
                 {
                     UserSession.Instance.SetLoggedInUser(director);
                     MessageBox.Show("Succsessfully logged in as DIRECTOR");
+
+                    var directorMainView = new WPFTutorial.View.DirectorMainView();
+                    Window mainWindow = Application.Current.MainWindow;
+                    mainWindow.Content = directorMainView;
                 }
                 else
                 {

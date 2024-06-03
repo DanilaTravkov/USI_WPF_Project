@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="WPFTutorial.View.DirectorSystemAssignedTeacherToExam"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFTutorial.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Background="Aquamarine" Margin="5" Text="Course language and Exam name which match, and teacher who runs that course (only those which are created by director)"/>
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding TeachersWithMatchingCourseExamNames}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Course Language" Binding="{Binding CourseLanguage}" Width="*"/>
+                <DataGridTextColumn Header="Exam Name" Binding="{Binding ExamName}" Width="*"/>
+                <DataGridTextColumn Header="Teacher who runs course (Id)" Binding="{Binding TeacherId}" Width="*"/>
+                <DataGridTextColumn Header="Teacher name" Binding="{Binding TeacherName}" Width="*"/>
+                <DataGridTextColumn Header="Teacher's grade" Binding="{Binding TeacherGrade}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding BestTeacher}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Teacher Id" Binding="{Binding TeacherId}" Width="*"/>
+                <DataGridTextColumn Header="Teacher Name" Binding="{Binding TeacherName}" Width="*"/>
+                <DataGridTextColumn Header="Course Language" Binding="{Binding CourseLanguage}" Width="*"/>
+                <DataGridTextColumn Header="Grade" Binding="{Binding TeacherGrade}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Background="Aquamarine" Grid.Row="3" Margin="5" Text="Exams created by director"/>
+        <DataGrid Grid.Row="4" AutoGenerateColumns="False" ItemsSource="{Binding ExamsCreatedByDirector}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Exam Id" Binding="{Binding Id}" Width="*"/>
+                <DataGridTextColumn Header="Exam Name" Binding="{Binding ExamName}" Width="*"/>
+                <DataGridTextColumn Header="Exam Language" Binding="{Binding Language}" Width="*"/>
+                <DataGridTextColumn Header="Created by (Id)" Binding="{Binding CreatorId}" Width="*"/>
+                <DataGridTextColumn Header="Exam Date" Binding="{Binding ExamDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
